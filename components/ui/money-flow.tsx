@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import { Icon } from './icons'
+import { useMounted } from '@/lib/use-mounted'
 
 /**
  * Sponsor → Orca → Site, with the middle node explicitly marked as taking
@@ -14,6 +15,7 @@ import { Icon } from './icons'
  */
 export function MoneyFlow({ variant = 'fee' }: { variant?: 'fee' | 'speed' }) {
   const ref = useRef<HTMLDivElement>(null)
+  const mounted = useMounted()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.8', 'end 0.4'] })
 
   // A single payment travels the full width as the section scrolls.
@@ -67,12 +69,12 @@ export function MoneyFlow({ variant = 'fee' }: { variant?: 'fee' | 'speed' }) {
         <div className="absolute inset-x-14 top-7 -z-0 h-px -translate-y-1/2 bg-foam/10">
           <motion.div
             data-scroll-fx="track"
-            style={{ width: trackFill }}
+            style={mounted ? { width: trackFill } : { width: '100%' }}
             className="h-px w-full bg-linear-to-r from-blue-400 to-blue-300"
           />
           <motion.span
             data-scroll-fx="decor"
-            style={{ left: travel, opacity: coinOpacity }}
+            style={mounted ? { left: travel, opacity: coinOpacity } : { opacity: 0 }}
             className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-200 shadow-[0_0_14px_var(--color-blue-300)]"
           />
         </div>
@@ -81,7 +83,7 @@ export function MoneyFlow({ variant = 'fee' }: { variant?: 'fee' | 'speed' }) {
       {/* The whole point of the diagram */}
       <motion.div
         data-scroll-fx="reveal"
-        style={{ opacity: noteOpacity }}
+        style={mounted ? { opacity: noteOpacity } : undefined}
         className="mx-auto mt-8 w-fit rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-center"
       >
         <p className="text-[0.8125rem] font-medium text-blue-100">

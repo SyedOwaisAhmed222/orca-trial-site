@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
 import { NODES, LINKS } from './network-data'
+import { useMounted } from '@/lib/use-mounted'
 
 /**
  * The site network, rendered as something you can push around rather than a
@@ -15,6 +16,7 @@ import { NODES, LINKS } from './network-data'
  */
 export function NetworkCanvas({ className = '' }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null)
+  const mounted = useMounted()
   const [hover, setHover] = useState<number | null>(null)
 
   // Pointer position, normalised to -0.5…0.5, smoothed.
@@ -62,7 +64,11 @@ export function NetworkCanvas({ className = '' }: { className?: string }) {
     >
       <motion.svg
         viewBox="0 0 100 58"
-        style={{ rotateX, rotateY, x: shiftX, y: shiftY, transformStyle: 'preserve-3d' }}
+        style={
+          mounted
+            ? { rotateX, rotateY, x: shiftX, y: shiftY, transformStyle: 'preserve-3d' }
+            : undefined
+        }
         className="h-auto w-full overflow-visible"
         role="img"
         aria-label="Illustrative map of Orca research sites across the United States"

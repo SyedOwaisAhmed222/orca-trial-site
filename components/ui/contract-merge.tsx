@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { useMounted } from '@/lib/use-mounted'
 
 /**
  * Site cards converge into one contract as the section scrolls. Wordless on
@@ -62,6 +63,7 @@ function SiteCard({
 
 export function ContractMerge() {
   const ref = useRef<HTMLDivElement>(null)
+  const mounted = useMounted()
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start 0.9', 'end 0.55'],
@@ -79,34 +81,37 @@ export function ContractMerge() {
     <div ref={ref} className="relative h-[20rem] w-full sm:h-[23rem]">
       <motion.p
         data-scroll-fx="decor"
-        style={{ opacity: beforeOpacity }}
+        style={mounted ? { opacity: beforeOpacity } : { opacity: 0 }}
         className="absolute inset-x-0 top-0 text-center text-[0.6875rem] font-semibold tracking-[0.22em] text-fog uppercase"
       >
         Multiple sites
       </motion.p>
       <motion.p
         data-scroll-fx="reveal"
-        style={{ opacity: afterOpacity }}
+        style={mounted ? { opacity: afterOpacity } : undefined}
         className="absolute inset-x-0 top-0 text-center text-[0.6875rem] font-semibold tracking-[0.22em] text-blue-300 uppercase"
       >
         One umbrella
       </motion.p>
 
       <div className="absolute inset-0">
-        {SITES.map((s, i) => (
-          <SiteCard key={i} progress={scrollYProgress} x={s.x} y={s.y} lag={s.lag} />
-        ))}
+        {mounted &&
+          SITES.map((s, i) => (
+            <SiteCard key={i} progress={scrollYProgress} x={s.x} y={s.y} lag={s.lag} />
+          ))}
 
-        <motion.span
-          aria-hidden
-          data-scroll-fx="decor"
-          style={{ scale: ringScale, opacity: ringOpacity }}
-          className="absolute top-1/2 left-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/50"
-        />
+        {mounted && (
+          <motion.span
+            aria-hidden
+            data-scroll-fx="decor"
+            style={{ scale: ringScale, opacity: ringOpacity }}
+            className="absolute top-1/2 left-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/50"
+          />
+        )}
 
         <motion.div
           data-scroll-fx="reveal"
-          style={{ scale: contractScale, opacity: contractOpacity }}
+          style={mounted ? { scale: contractScale, opacity: contractOpacity } : undefined}
           className="glass ring-glow absolute top-1/2 left-1/2 w-60 -translate-x-1/2 -translate-y-1/2 rounded-3xl p-7 text-center"
         >
           <p className="font-display text-[3rem] leading-none font-semibold tracking-[-0.05em] text-foam">

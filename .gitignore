@@ -1,6 +1,7 @@
 node_modules/
 .next/
-.next-verify/
+# Isolated build/dev output used for verification (see README).
+.next-*/
 out/
 build/
 .env*

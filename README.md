@@ -168,6 +168,23 @@ Choices here exist to protect the lead, not just to look tidy:
 - **Analytics hooks.** Every CTA carries a `data-cta="…"` attribute, so GTM or
   Plausible can be wired up without touching components.
 
+## Verifying changes
+
+**A production build hides hydration mismatches.** They are development-only
+warnings, so checking `next start` will report a clean console while the dev
+server shows errors. Always check both:
+
+```bash
+NEXT_DIST_DIR=.next-devcheck npx next dev -p 3390     # hydration warnings
+NEXT_DIST_DIR=.next-verify   npx next build           # type errors
+NEXT_DIST_DIR=.next-verify   npx next start -p 3360   # runtime behaviour
+```
+
+Scroll-linked Motion values are the usual cause: the server and client
+serialise the resulting inline styles slightly differently. Anything whose
+style comes from `useScroll`/`useTransform` should be gated on `useMounted()`
+(`lib/use-mounted.ts`) so the first client render matches the server's.
+
 ## Notes
 
 - Fonts (Sora + Inter) are self-hosted at build time by `next/font`, so there is
