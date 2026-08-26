@@ -45,13 +45,10 @@ export function WhyOrca() {
           {audiences.map((a, i) => (
             <Reveal key={a.key} delay={i * 0.1} direction={i === 0 ? 'left' : 'right'}>
               <SpotlightCard className="h-full rounded-4xl p-8 md:p-10">
-                <span className="section-label">{a.eyebrow}</span>
-                <h3 className="mt-4 font-display text-[1.75rem] leading-tight font-semibold tracking-[-0.03em] text-foam text-balance">
-                  {a.title}
-                </h3>
-                <ul className="mt-7 grid gap-3.5">
+                <h3 className="section-label">{a.eyebrow}</h3>
+                <ul className="mt-6 grid gap-4">
                   {a.points.map((p) => (
-                    <li key={p} className="flex items-start gap-3 text-[0.9375rem] text-mist">
+                    <li key={p} className="flex items-start gap-3 text-[1.0625rem] text-foam">
                       <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-400/12 text-blue-300">
                         <Icon.check className="h-3 w-3" strokeWidth={2.4} />
                       </span>

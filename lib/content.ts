@@ -70,7 +70,6 @@ export const audiences = [
   {
     key: 'sponsors',
     eyebrow: 'For sponsors',
-    title: 'One step solution for study startup',
     points: [
       'One step solution for study startup',
       'Risk-free business development for clinical sites',
@@ -80,7 +79,6 @@ export const audiences = [
   {
     key: 'sites',
     eyebrow: 'For research sites',
-    title: 'Study availability through the year',
     points: [
       'Study availability through the year',
       'No additional fee from the site',
