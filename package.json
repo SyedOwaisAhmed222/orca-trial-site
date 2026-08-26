@@ -1,0 +1,27 @@
+{
+  "name": "orcatrial-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Orca Trial — marketing website",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "node scripts/export-static.mjs"
+  },
+  "dependencies": {
+    "motion": "^12.23.12",
+    "next": "^15.4.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3"
+  }
+}
