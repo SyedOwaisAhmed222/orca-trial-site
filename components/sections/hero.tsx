@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { motion, useScroll, useTransform } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { stats } from '@/lib/content'
 import { ButtonLink } from '../ui/button'
@@ -15,7 +15,6 @@ const fadeUp = {
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null)
-  const reduce = useReducedMotion()
 
   // On phones the hero is taller than the viewport, so a scroll-linked fade
   // dims the stat rail while it is still the thing being read. Parallax is a
@@ -45,12 +44,12 @@ export function Hero() {
 
       <div className="container-page relative">
         <motion.div
-          style={reduce || !wide ? undefined : { y, opacity }}
+          style={wide ? { y, opacity } : undefined}
           className="flex min-h-[calc(100svh-var(--nav-h))] flex-col justify-center py-20 md:py-24"
         >
           <motion.div
             variants={{ show: { transition: { staggerChildren: 0.11, delayChildren: 0.1 } } }}
-            initial={reduce ? false : 'hidden'}
+            initial="hidden"
             animate="show"
             className="max-w-4xl"
           >
@@ -106,7 +105,7 @@ export function Hero() {
           {/* Stat rail */}
           <motion.dl
             variants={{ show: { transition: { staggerChildren: 0.09, delayChildren: 0.55 } } }}
-            initial={reduce ? false : 'hidden'}
+            initial="hidden"
             animate="show"
             className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-4xl border border-foam/8 bg-foam/6 lg:grid-cols-4"
           >
@@ -142,7 +141,7 @@ export function Hero() {
       >
         <span className="text-[0.625rem] font-medium tracking-[0.24em] uppercase">Scroll</span>
         <motion.span
-          animate={reduce ? undefined : { y: [0, 6, 0] }}
+          animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
           <Icon.arrowDown className="h-4 w-4" />

@@ -3,6 +3,7 @@ import { Inter, Sora } from 'next/font/google'
 import { site } from '@/lib/content'
 import { Atmosphere } from '@/components/ui/atmosphere'
 import { LogoGradientDefs } from '@/components/ui/logo'
+import { MotionProvider } from '@/components/motion-provider'
 import './globals.css'
 
 const sora = Sora({
@@ -98,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <LogoGradientDefs />
         <Atmosphere />
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}

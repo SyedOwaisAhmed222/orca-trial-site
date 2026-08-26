@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion, type Variants } from 'motion/react'
+import { motion, type Variants } from 'motion/react'
 import type { ReactNode } from 'react'
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none'
@@ -28,13 +28,12 @@ export function Reveal({
   amount?: number
   as?: 'div' | 'section' | 'li' | 'span' | 'header'
 }) {
-  const reduce = useReducedMotion()
   const M = motion[as]
 
   return (
     <M
       className={className}
-      initial={reduce ? false : { opacity: 0, filter: 'blur(6px)', ...offset[direction] }}
+      initial={{ opacity: 0, filter: 'blur(6px)', ...offset[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, amount }}
       transition={{ duration: 0.75, delay, ease: [0.16, 1, 0.3, 1] }}
@@ -69,12 +68,11 @@ export function RevealGroup({
   className?: string
   amount?: number
 }) {
-  const reduce = useReducedMotion()
   return (
     <motion.div
       className={className}
       variants={groupVariants}
-      initial={reduce ? false : 'hidden'}
+      initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount }}
     >

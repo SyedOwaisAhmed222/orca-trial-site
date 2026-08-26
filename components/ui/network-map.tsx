@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'motion/react'
+import { motion } from 'motion/react'
 
 /**
  * Stylised map of the US site footprint. Coordinates are hand-placed inside a
@@ -43,7 +43,6 @@ export function NetworkMap({
   /** Backdrop mode: no label, no sonar pulses, thinner marks. */
   decorative?: boolean
 }) {
-  const reduce = useReducedMotion()
   // Two instances of this map can be on the page at once, so the gradient ids
   // have to differ or the second one would redefine the first.
   const glow = decorative ? 'node-glow-bg' : 'node-glow'
@@ -81,7 +80,7 @@ export function NetworkMap({
               y1={NODES[a][1]}
               x2={NODES[b][0]}
               y2={NODES[b][1]}
-              initial={reduce ? undefined : { pathLength: 0, opacity: 0 }}
+              initial={{ pathLength: 0, opacity: 0 }}
               whileInView={{ pathLength: 1, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.1, delay: 0.2 + (i % 24) * 0.03, ease: 'easeOut' }}
@@ -93,24 +92,21 @@ export function NetworkMap({
           {NODES.map(([x, y, w], i) => (
             <g key={'n' + i}>
               {w === 2 && (
-                <circle cx={x} cy={y} r="2.6" fill={'url(#' + glow + ')'} opacity="0.55">
-                  {!reduce && (
-                    <animate
-                      attributeName="opacity"
-                      values="0.15;0.6;0.15"
-                      dur="4s"
-                      begin={i * 0.28 + 's'}
-                      repeatCount="indefinite"
-                    />
-                  )}
-                </circle>
+                <circle
+                  cx={x}
+                  cy={y}
+                  r="2.6"
+                  fill={'url(#' + glow + ')'}
+                  className="animate-node-pulse"
+                  style={{ animationDelay: (i * 0.28).toFixed(2) + 's' }}
+                />
               )}
               <motion.circle
                 cx={x}
                 cy={y}
                 r={w === 2 ? 0.85 : 0.5}
                 fill={w === 2 ? 'var(--color-aqua-200)' : 'var(--color-aqua-400)'}
-                initial={reduce ? undefined : { scale: 0, opacity: 0 }}
+                initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{

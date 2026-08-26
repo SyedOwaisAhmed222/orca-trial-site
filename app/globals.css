@@ -39,6 +39,7 @@
   --animate-drift-slow: drift 34s ease-in-out infinite reverse;
   --animate-marquee: marquee 46s linear infinite;
   --animate-sonar: sonar 3.6s ease-out infinite;
+  --animate-node-pulse: node-pulse 4s ease-in-out infinite;
   --animate-shimmer: shimmer 2.6s linear infinite;
 }
 
@@ -72,6 +73,19 @@
   100% {
     transform: scale(2.6);
     opacity: 0;
+  }
+}
+
+/* Hub glow on the network map. A CSS animation rather than SVG <animate> so
+   the global prefers-reduced-motion rule can neutralise it without the
+   component branching at render time (which would break hydration). */
+@keyframes node-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
   }
 }
 
