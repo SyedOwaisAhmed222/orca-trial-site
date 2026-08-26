@@ -2,13 +2,14 @@
   "name": "orcatrial-web",
   "version": "1.0.0",
   "private": true,
-  "description": "Orca Trial — marketing website",
+  "description": "Orca Trial \u2014 marketing website",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/check-tokens.mjs && next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "node scripts/export-static.mjs"
+    "export": "node scripts/export-static.mjs",
+    "check:tokens": "node scripts/check-tokens.mjs"
   },
   "dependencies": {
     "motion": "^12.23.12",
