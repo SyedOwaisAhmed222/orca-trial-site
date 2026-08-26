@@ -22,7 +22,7 @@ export function BusinessModel() {
 
         <div className="mt-14 grid gap-4 lg:grid-cols-2">
           {businessModel.map((m, i) => (
-            <Reveal key={m.kicker} delay={i * 0.12}>
+            <Reveal key={m.title} delay={i * 0.12}>
               <SpotlightCard className="relative h-full rounded-5xl p-9 md:p-11">
                 <span
                   aria-hidden
@@ -30,8 +30,7 @@ export function BusinessModel() {
                 >
                   0{i + 1}
                 </span>
-                <span className="section-label">{m.kicker}</span>
-                <h3 className="mt-5 max-w-sm font-display text-[clamp(1.6rem,2.6vw,2.1rem)] leading-[1.12] font-semibold tracking-[-0.035em] text-foam text-balance">
+                <h3 className="max-w-sm font-display text-[clamp(1.6rem,2.6vw,2.1rem)] leading-[1.12] font-semibold tracking-[-0.035em] text-foam text-balance">
                   {m.title}
                 </h3>
                 <p className="mt-6 text-[0.9375rem] leading-relaxed text-mist text-pretty">

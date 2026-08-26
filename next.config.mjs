@@ -3,6 +3,9 @@ const staticExport = process.env.STATIC_EXPORT === '1'
 
 const nextConfig = {
   reactStrictMode: true,
+  // Lets a verification build run without clobbering the .next directory a
+  // `next dev` server is already using:  NEXT_DIST_DIR=.next-verify next build
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   // `npm run export` emits a plain-HTML `out/` folder for FTP / any static host.
   // The default build keeps the /api/register route working on Node or Vercel.
   // Route handlers cannot be statically exported, so `npm run export` runs

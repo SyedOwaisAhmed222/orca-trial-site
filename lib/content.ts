@@ -89,12 +89,10 @@ export const audiences = [
 
 export const businessModel = [
   {
-    kicker: 'Our commitment',
     title: 'No hidden fee',
     body: 'At Orca, we do not charge any hidden fees along the process — not from our network, our sites, or sponsors and CROs. After negotiating a budget, our philosophy is to cover all costs incurred during the study. Orca believes in negotiating a single budget with our sponsors as well as our sites.',
   },
   {
-    kicker: 'Our commitment',
     title: 'Risk-free business development for site',
     body: 'Orca receives payments from sponsors on behalf of the site and disburses them as soon as we receive them. There is no hidden fee in between. This allows research sites hassle-free business development while we handle all feedback on their behalf.',
   },

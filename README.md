@@ -25,6 +25,14 @@ npm run dev          # http://localhost:3000
 | `npm start`      | Serve the production build on Node                                |
 | `npm run export` | Fully static `out/` folder for FTP / S3 / any static host         |
 
+> Running `next build` while a `next dev` server is up corrupts the shared
+> `.next` directory and leaves the dev server serving 500s. Build into a
+> separate directory instead:
+> ```bash
+> NEXT_DIST_DIR=.next-verify npx next build
+> NEXT_DIST_DIR=.next-verify npx next start -p 3360
+> ```
+
 ## Page structure
 
 `app/page.tsx` composes the sections in order:
