@@ -66,7 +66,7 @@ export function MoneyFlow({ variant = 'fee' }: { variant?: 'fee' | 'speed' }) {
         {/* Track behind the three nodes */}
         <div className="absolute inset-x-14 top-7 -z-0 h-px -translate-y-1/2 bg-foam/10">
           <motion.div
-            data-scroll-fx="reveal"
+            data-scroll-fx="track"
             style={{ width: trackFill }}
             className="h-px w-full bg-linear-to-r from-blue-400 to-blue-300"
           />

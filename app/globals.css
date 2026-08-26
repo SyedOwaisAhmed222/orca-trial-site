@@ -311,6 +311,12 @@ body {
   [data-scroll-fx='decor'] {
     display: none !important;
   }
+  /* A scroll-driven progress track: opacity alone is not enough, its width is
+     the thing being animated, so resolve that to complete too. */
+  [data-scroll-fx='track'] {
+    opacity: 1 !important;
+    width: 100% !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
