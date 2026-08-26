@@ -32,8 +32,7 @@ npm run dev          # http://localhost:3000
 | Section              | File                                        | Anchor       |
 | -------------------- | ------------------------------------------- | ------------ |
 | Hero + stat rail     | `components/sections/hero.tsx`              | `#top`       |
-| Therapeutic ticker   | `components/sections/marquee.tsx`           | —            |
-| Guarantee strip      | `components/sections/trust-bar.tsx`         | —            |
+| Guarantee band       | `components/sections/trust-bar.tsx`         | —            |
 | Why choose Orca      | `components/sections/why-orca.tsx`          | `#why`       |
 | Business model       | `components/sections/business-model.tsx`    | `#model`     |
 | Sponsors / CROs      | `components/sections/sponsors.tsx`          | `#sponsors`  |
@@ -103,6 +102,19 @@ NEXT_PUBLIC_FORM_ENDPOINT=https://formspree.io/f/xxxxxxx npm run export
 
 `scripts/export-static.mjs` temporarily hides `app/api` for the duration of that
 build and always restores it afterwards.
+
+## Layout system
+
+- Sections open with a numbered heading: index, label, hairline rule, then a
+  two-column title/summary (`components/ui/section-heading.tsx`). Everything is
+  left-aligned — mixed left/centre headings read as inconsistent, not varied.
+- Vertical rhythm comes from the `section-pad` / `section-pad-tight` utilities
+  in `globals.css`, never from per-section `py-*`.
+- `section-band` tints alternating sections so consecutive sections do not read
+  as one undifferentiated column of cards.
+- `html, body { overflow-x: clip }` contains the decorative glows that
+  deliberately bleed past section edges. It has to be `clip`, not `hidden` —
+  `hidden` creates a scroll container and breaks the sticky columns.
 
 ## Conversion notes
 

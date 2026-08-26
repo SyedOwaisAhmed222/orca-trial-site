@@ -35,29 +35,45 @@ const LINKS: Array<[number, number]> = (() => {
   return out
 })()
 
-export function NetworkMap({ className = '' }: { className?: string }) {
+export function NetworkMap({
+  className = '',
+  decorative = false,
+}: {
+  className?: string
+  /** Backdrop mode: no label, no sonar pulses, thinner marks. */
+  decorative?: boolean
+}) {
   const reduce = useReducedMotion()
+  // Two instances of this map can be on the page at once, so the gradient ids
+  // have to differ or the second one would redefine the first.
+  const glow = decorative ? 'node-glow-bg' : 'node-glow'
+  const link = decorative ? 'link-grad-bg' : 'link-grad'
 
   return (
     <div className={'relative ' + className}>
       <svg
         viewBox="0 0 100 58"
         className="h-auto w-full overflow-visible"
-        role="img"
-        aria-label="Illustrative map of Orca research sites across the United States"
+        role={decorative ? undefined : 'img'}
+        aria-hidden={decorative || undefined}
+        aria-label={
+          decorative
+            ? undefined
+            : 'Illustrative map of Orca research sites across the United States'
+        }
       >
         <defs>
-          <radialGradient id="node-glow">
+          <radialGradient id={glow}>
             <stop offset="0%" stopColor="var(--color-aqua-300)" stopOpacity="0.85" />
             <stop offset="100%" stopColor="var(--color-aqua-500)" stopOpacity="0" />
           </radialGradient>
-          <linearGradient id="link-grad" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id={link} x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="var(--color-aqua-400)" stopOpacity="0.5" />
             <stop offset="100%" stopColor="var(--color-tide-500)" stopOpacity="0.15" />
           </linearGradient>
         </defs>
 
-        <g stroke="url(#link-grad)" strokeWidth="0.16">
+        <g stroke={'url(#' + link + ')'} strokeWidth="0.16">
           {LINKS.map(([a, b], i) => (
             <motion.line
               key={'l' + i}
@@ -77,7 +93,7 @@ export function NetworkMap({ className = '' }: { className?: string }) {
           {NODES.map(([x, y, w], i) => (
             <g key={'n' + i}>
               {w === 2 && (
-                <circle cx={x} cy={y} r="2.6" fill="url(#node-glow)" opacity="0.55">
+                <circle cx={x} cy={y} r="2.6" fill={'url(#' + glow + ')'} opacity="0.55">
                   {!reduce && (
                     <animate
                       attributeName="opacity"

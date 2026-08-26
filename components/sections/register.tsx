@@ -135,10 +135,17 @@ export function Register() {
           {/* Pitch */}
           <Reveal direction="left">
             <div className="lg:sticky lg:top-28">
-              <span className="section-label">
-                <span className="h-px w-8 bg-linear-to-r from-transparent to-aqua-400" />
-                {copy.eyebrow}
-              </span>
+              {/* Matches the numbered rule the other sections open with. */}
+              <div className="flex items-center gap-4">
+                <span className="font-display text-[0.6875rem] font-semibold tracking-[0.14em] text-aqua-400 tabular-nums">
+                  06
+                </span>
+                <span className="section-label">{copy.eyebrow}</span>
+                <span
+                  aria-hidden
+                  className="h-px flex-1 bg-linear-to-r from-foam/16 via-foam/8 to-foam/0"
+                />
+              </div>
 
               <AnimatePresence mode="wait">
                 <motion.div

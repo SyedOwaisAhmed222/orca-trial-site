@@ -6,6 +6,7 @@ import { stats } from '@/lib/content'
 import { ButtonLink } from '../ui/button'
 import { Counter } from '../ui/counter'
 import { Icon } from '../ui/icons'
+import { NetworkMap } from '../ui/network-map'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26, filter: 'blur(8px)' },
@@ -34,6 +35,14 @@ export function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative isolate overflow-hidden pt-[var(--nav-h)]">
+      {/* The network itself, faint, behind the fold */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-[16%] -right-[18%] hidden w-[80%] opacity-[0.16] [mask-image:radial-gradient(ellipse_at_60%_50%,#000_25%,transparent_72%)] lg:block"
+      >
+        <NetworkMap decorative />
+      </div>
+
       <div className="container-page relative">
         <motion.div
           style={reduce || !wide ? undefined : { y, opacity }}
