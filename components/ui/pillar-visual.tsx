@@ -41,8 +41,8 @@ export function PillarVisual({ index }: { index: number }) {
               y1="75"
               x2="158"
               y2={y + 13}
-              stroke={i === match ? 'var(--color-blue-200)' : 'var(--color-foam)'}
-              strokeOpacity={i === match ? 1 : 0.22}
+              stroke={i === match ? 'var(--color-blue-600)' : 'var(--color-line)'}
+              strokeOpacity={1}
               strokeWidth={i === match ? 2.4 : 1.2}
               {...draw(0.04 + i * 0.05)}
             />
@@ -52,10 +52,10 @@ export function PillarVisual({ index }: { index: number }) {
               width="30"
               height="26"
               rx="7"
-              fill={i === match ? 'var(--color-blue-500)' : 'transparent'}
-              fillOpacity={i === match ? 0.5 : 0}
-              stroke={i === match ? 'var(--color-blue-200)' : 'var(--color-foam)'}
-              strokeOpacity={i === match ? 1 : 0.25}
+              fill={i === match ? 'var(--color-blue-500)' : 'var(--color-surface-2)'}
+              fillOpacity={1}
+              stroke={i === match ? 'var(--color-blue-600)' : 'var(--color-line)'}
+              strokeOpacity={1}
               strokeWidth="1.4"
               {...fade(0.1 + i * 0.05)}
             />
@@ -78,9 +78,9 @@ export function PillarVisual({ index }: { index: number }) {
             width="40"
             height="16"
             rx="5"
-            fill="var(--color-foam)"
+            fill="var(--color-ink)"
             fillOpacity="0.12"
-            stroke="var(--color-foam)"
+            stroke="var(--color-ink)"
             strokeOpacity="0.28"
             strokeWidth="1.2"
             {...fade(i * 0.04)}
@@ -91,8 +91,8 @@ export function PillarVisual({ index }: { index: number }) {
             key={'p' + y}
             d={`M66 ${y + 8} C 110 ${y + 8}, 118 75, 152 75`}
             fill="none"
-            stroke="var(--color-blue-400)"
-            strokeOpacity="0.7"
+            stroke="var(--color-blue-500)"
+            strokeOpacity="0.9"
             strokeWidth="1.4"
             {...draw(0.12 + i * 0.035)}
           />
@@ -104,8 +104,8 @@ export function PillarVisual({ index }: { index: number }) {
           height="36"
           rx="10"
           fill="var(--color-blue-500)"
-          fillOpacity="0.45"
-          stroke="var(--color-blue-200)"
+          fillOpacity="1"
+          stroke="var(--color-blue-700)"
           strokeWidth="1.6"
           {...fade(0.32)}
         />
@@ -128,8 +128,8 @@ export function PillarVisual({ index }: { index: number }) {
               y1="75"
               x2={s.x}
               y2={s.y}
-              stroke="var(--color-blue-400)"
-              strokeOpacity="0.65"
+              stroke="var(--color-blue-500)"
+              strokeOpacity="0.9"
               strokeWidth="1.4"
               {...draw(i * 0.04)}
             />
@@ -137,8 +137,8 @@ export function PillarVisual({ index }: { index: number }) {
               cx={s.x}
               cy={s.y}
               r="8"
-              fill="var(--color-blue-400)"
-              fillOpacity="0.35"
+              fill="var(--color-blue-200)"
+              fillOpacity="1"
               stroke="var(--color-blue-300)"
               strokeOpacity="0.6"
               {...fade(0.08 + i * 0.04)}
@@ -150,8 +150,8 @@ export function PillarVisual({ index }: { index: number }) {
           cy="75"
           r="20"
           fill="var(--color-blue-500)"
-          fillOpacity="0.5"
-          stroke="var(--color-blue-200)"
+          fillOpacity="1"
+          stroke="var(--color-blue-700)"
           strokeWidth="1.6"
           {...fade(0.28)}
         />
@@ -163,14 +163,14 @@ export function PillarVisual({ index }: { index: number }) {
   const marks = [30, 110, 190]
   return (
     <svg viewBox="0 0 220 150" className={cls} aria-hidden>
-      <line x1="30" y1="70" x2="190" y2="70" stroke="var(--color-foam)" strokeOpacity="0.22" strokeWidth="1.2" />
+      <line x1="30" y1="70" x2="190" y2="70" stroke="var(--color-ink)" strokeOpacity="0.22" strokeWidth="1.2" />
       <motion.line
         x1="30"
         y1="70"
         x2="190"
         y2="70"
-        stroke="var(--color-blue-300)"
-        strokeWidth="2.6"
+        stroke="var(--color-blue-500)"
+        strokeWidth="3"
         {...draw(0.05)}
       />
       {marks.map((x, i) => (
@@ -179,14 +179,14 @@ export function PillarVisual({ index }: { index: number }) {
             cx={x}
             cy="70"
             r={i === 2 ? 9 : 5}
-            fill={i === 2 ? 'var(--color-blue-200)' : 'var(--color-blue-400)'}
+            fill={i === 2 ? 'var(--color-blue-700)' : 'var(--color-blue-500)'}
             {...fade(0.18 + i * 0.08)}
           />
           <motion.text
             x={x}
             y="98"
             textAnchor="middle"
-            fill="var(--color-fog)"
+            fill="var(--color-ink-muted)"
             style={{ fontSize: 10, letterSpacing: '0.16em' }}
             {...fade(0.22 + i * 0.08)}
           >

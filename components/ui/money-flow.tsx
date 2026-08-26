@@ -16,20 +16,20 @@ import { useMounted } from '@/lib/use-mounted'
 export function MoneyFlow({ variant = 'fee' }: { variant?: 'fee' | 'speed' }) {
   const ref = useRef<HTMLDivElement>(null)
   const mounted = useMounted()
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.8', 'end 0.4'] })
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.95', 'end 0.75'] })
 
   // A single payment travels the full width as the section scrolls.
   const fast = variant === 'speed'
-  const travel = useTransform(scrollYProgress, fast ? [0.1, 0.45] : [0.1, 0.9], ['0%', '100%'])
+  const travel = useTransform(scrollYProgress, fast ? [0.08, 0.34] : [0.08, 0.62], ['0%', '100%'])
   const coinOpacity = useTransform(
     scrollYProgress,
-    fast ? [0.05, 0.12, 0.45, 0.52] : [0.05, 0.15, 0.9, 1],
+    fast ? [0.04, 0.1, 0.34, 0.4] : [0.04, 0.12, 0.62, 0.7],
     [0, 1, 1, 0],
   )
-  const trackFill = useTransform(scrollYProgress, fast ? [0.1, 0.45] : [0.1, 0.9], ['0%', '100%'])
+  const trackFill = useTransform(scrollYProgress, fast ? [0.08, 0.34] : [0.08, 0.62], ['0%', '100%'])
   const noteOpacity = useTransform(
     scrollYProgress,
-    fast ? [0.3, 0.42] : [0.42, 0.55],
+    fast ? [0.24, 0.34] : [0.45, 0.58],
     [0, 1],
   )
 
@@ -49,16 +49,16 @@ export function MoneyFlow({ variant = 'fee' }: { variant?: 'fee' | 'speed' }) {
                 'grid h-14 w-14 place-items-center rounded-2xl border backdrop-blur-sm transition-colors ' +
                 (variant === 'fee'
                   ? i === 1
-                    ? 'border-blue-400/45 bg-blue-500/12 text-blue-200'
-                    : 'border-foam/12 bg-hull/80 text-mist'
+                    ? 'border-blue-500 bg-blue-500 text-white'
+                    : 'border-ink/12 bg-surface/80 text-ink-muted'
                   : i === 2
-                    ? 'border-blue-400/45 bg-blue-500/12 text-blue-200'
-                    : 'border-foam/12 bg-hull/80 text-mist')
+                    ? 'border-blue-500 bg-blue-500 text-white'
+                    : 'border-line bg-canvas text-ink-muted')
               }
             >
               <Glyph className="h-5 w-5" />
             </span>
-            <span className="text-[0.6875rem] font-semibold tracking-[0.16em] text-fog uppercase">
+            <span className="text-[0.6875rem] font-semibold tracking-[0.16em] text-ink-faint uppercase">
               {n.label}
             </span>
           </div>
@@ -66,7 +66,7 @@ export function MoneyFlow({ variant = 'fee' }: { variant?: 'fee' | 'speed' }) {
         })}
 
         {/* Track behind the three nodes */}
-        <div className="absolute inset-x-14 top-7 -z-0 h-px -translate-y-1/2 bg-foam/10">
+        <div className="absolute inset-x-14 top-7 -z-0 h-px -translate-y-1/2 bg-line">
           <motion.div
             data-scroll-fx="track"
             style={mounted ? { width: trackFill } : { width: '100%' }}
@@ -75,7 +75,7 @@ export function MoneyFlow({ variant = 'fee' }: { variant?: 'fee' | 'speed' }) {
           <motion.span
             data-scroll-fx="decor"
             style={mounted ? { left: travel, opacity: coinOpacity } : { opacity: 0 }}
-            className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-200 shadow-[0_0_14px_var(--color-blue-300)]"
+            className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600 shadow-[0_0_0_4px_rgba(68,114,196,0.18)]"
           />
         </div>
       </div>
@@ -84,9 +84,9 @@ export function MoneyFlow({ variant = 'fee' }: { variant?: 'fee' | 'speed' }) {
       <motion.div
         data-scroll-fx="reveal"
         style={mounted ? { opacity: noteOpacity } : undefined}
-        className="mx-auto mt-8 w-fit rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-center"
+        className="mx-auto mt-8 w-fit rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-center"
       >
-        <p className="text-[0.8125rem] font-medium text-blue-100">
+        <p className="text-[0.8125rem] font-semibold text-blue-700">
           {variant === 'fee'
             ? 'There is no hidden fee in between'
             : 'As soon as we receive them'}

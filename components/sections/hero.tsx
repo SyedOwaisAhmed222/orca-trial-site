@@ -51,7 +51,7 @@ export function Hero() {
             className="max-w-4xl lg:max-w-2xl"
           >
             <motion.div variants={fadeUp} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
-              <span className="glass inline-flex items-center gap-2.5 rounded-full py-2 pr-5 pl-2.5 text-[0.75rem] font-medium tracking-tight text-mist">
+              <span className="glass inline-flex items-center gap-2.5 rounded-full py-2 pr-5 pl-2.5 text-[0.75rem] font-medium tracking-tight text-ink-muted">
                 <span className="relative grid h-6 w-6 place-items-center">
                   <span className="absolute h-2 w-2 rounded-full bg-blue-400 animate-sonar" />
                   <span className="h-2 w-2 rounded-full bg-blue-400" />
@@ -73,7 +73,7 @@ export function Hero() {
             <motion.p
               variants={fadeUp}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-8 max-w-2xl text-[1.0625rem] leading-relaxed text-mist text-pretty md:text-lg"
+              className="mt-8 max-w-2xl text-[1.0625rem] leading-relaxed text-ink-muted text-pretty md:text-lg"
             >
               {site.intro}
             </motion.p>
@@ -102,22 +102,22 @@ export function Hero() {
             variants={{ show: { transition: { staggerChildren: 0.09, delayChildren: 0.55 } } }}
             initial="hidden"
             animate="show"
-            className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-4xl border border-foam/8 bg-foam/6 lg:grid-cols-4"
+            className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-4xl border border-ink/8 bg-ink/6 lg:grid-cols-4"
           >
             {stats.map((s) => (
               <motion.div
                 key={s.label}
                 variants={fadeUp}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative bg-abyss/80 px-6 py-7 backdrop-blur-md transition-colors duration-500 hover:bg-hull/80"
+                className="group relative bg-canvas/80 px-6 py-7 backdrop-blur-md transition-colors duration-500 hover:bg-surface/80"
               >
-                <dt className="text-[0.6875rem] font-semibold tracking-[0.16em] text-fog uppercase">
+                <dt className="text-[0.6875rem] font-semibold tracking-[0.16em] text-ink-faint uppercase">
                   {s.label}
                 </dt>
-                <dd className="mt-3 font-display text-[clamp(2rem,3.6vw,2.75rem)] leading-none font-semibold tracking-[-0.04em] text-foam">
+                <dd className="mt-3 font-display text-[clamp(2rem,3.6vw,2.75rem)] leading-none font-semibold tracking-[-0.04em] text-ink">
                   <Counter value={s.value} suffix={s.suffix} />
                 </dd>
-                <p className="mt-2 text-[0.8125rem] text-fog">{s.sub}</p>
+                <p className="mt-2 text-[0.8125rem] text-ink-faint">{s.sub}</p>
                 <span className="absolute inset-x-6 bottom-0 h-px scale-x-0 bg-linear-to-r from-blue-400 to-transparent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
               </motion.div>
             ))}
@@ -132,7 +132,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.8 }}
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-fog transition-colors hover:text-blue-300 lg:flex"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-ink-faint transition-colors hover:text-blue-600 lg:flex"
       >
         <span className="text-[0.625rem] font-medium tracking-[0.24em] uppercase">Scroll</span>
         <motion.span

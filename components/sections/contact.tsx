@@ -31,7 +31,7 @@ export function Contact() {
             <h2 className="relative mx-auto mt-5 max-w-3xl font-display text-[clamp(2rem,4.4vw,3.4rem)] leading-[1.05] font-semibold tracking-[-0.035em] text-balance">
               Let&apos;s <span className="text-gradient">Connect</span>
             </h2>
-            <p className="relative mx-auto mt-6 max-w-2xl text-[1.0625rem] leading-relaxed text-mist text-pretty">
+            <p className="relative mx-auto mt-6 max-w-2xl text-[1.0625rem] leading-relaxed text-ink-muted text-pretty">
               Orca Trial represents an entirely new approach to align all stakeholders in clinical
               research from patients to physician and clinic research. Whether your interest is
               from the perspective of a CRO, sponsor, or Site, contact Orca to learn what we can do
@@ -66,10 +66,10 @@ export function Contact() {
             const inner = (
               <>
                 <Glyph className="h-5 w-5 text-blue-400" />
-                <span className="mt-4 block text-[0.6875rem] font-semibold tracking-[0.16em] text-fog uppercase">
+                <span className="mt-4 block text-[0.6875rem] font-semibold tracking-[0.16em] text-ink-faint uppercase">
                   {c.label}
                 </span>
-                <span className="mt-1.5 block text-[0.9375rem] leading-snug text-foam">
+                <span className="mt-1.5 block text-[0.9375rem] leading-snug text-ink">
                   {c.value}
                 </span>
               </>

@@ -40,8 +40,8 @@ function SiteCard({
   y: number
   lag: number
 }) {
-  const hold = 0.4 + lag
-  const land = 0.78 + lag
+  const hold = 0.28 + lag
+  const land = 0.62 + lag
 
   const tx = useTransform(progress, [0, hold, land], [x, x, 0])
   const ty = useTransform(progress, [0, hold, land], [y, y, 0])
@@ -52,11 +52,11 @@ function SiteCard({
     <motion.div
       data-scroll-fx="decor"
       style={{ x: tx, y: ty, scale, opacity }}
-      className="absolute top-1/2 left-1/2 -mt-7 -ml-14 h-14 w-28 rounded-xl border border-foam/20 bg-shelf/95 shadow-lg shadow-black/40"
+      className="absolute top-1/2 left-1/2 -mt-7 -ml-14 h-14 w-28 rounded-xl border-2 border-blue-200 bg-canvas shadow-[0_4px_14px_-4px_rgba(16,25,43,0.18)]"
     >
-      <span className="absolute inset-x-3 top-3.5 h-1.5 rounded-full bg-foam/30" />
-      <span className="absolute inset-x-3 top-7 h-1.5 w-3/5 rounded-full bg-foam/16" />
-      <span className="absolute right-3 bottom-3 h-1.5 w-1.5 rounded-full bg-blue-400" />
+      <span className="absolute inset-x-3 top-3.5 h-1.5 rounded-full bg-blue-200" />
+      <span className="absolute inset-x-3 top-7 h-1.5 w-3/5 rounded-full bg-surface-3" />
+      <span className="absolute right-3 bottom-3 h-1.5 w-1.5 rounded-full bg-blue-500" />
     </motion.div>
   )
 }
@@ -66,30 +66,30 @@ export function ContractMerge() {
   const mounted = useMounted()
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start 0.9', 'end 0.55'],
+    offset: ['start 0.95', 'end 0.85'],
   })
 
-  const contractScale = useTransform(scrollYProgress, [0.72, 1], [0.6, 1])
-  const contractOpacity = useTransform(scrollYProgress, [0.72, 0.92], [0, 1])
-  const ringScale = useTransform(scrollYProgress, [0.7, 1], [0.3, 1.6])
-  const ringOpacity = useTransform(scrollYProgress, [0.7, 0.85, 1], [0, 0.55, 0])
+  const contractScale = useTransform(scrollYProgress, [0.56, 0.78], [0.6, 1])
+  const contractOpacity = useTransform(scrollYProgress, [0.56, 0.72], [0, 1])
+  const ringScale = useTransform(scrollYProgress, [0.54, 0.86], [0.3, 1.6])
+  const ringOpacity = useTransform(scrollYProgress, [0.54, 0.68, 0.86], [0, 0.6, 0])
 
-  const beforeOpacity = useTransform(scrollYProgress, [0, 0.4, 0.62], [1, 1, 0])
-  const afterOpacity = useTransform(scrollYProgress, [0.78, 0.96], [0, 1])
+  const beforeOpacity = useTransform(scrollYProgress, [0, 0.28, 0.46], [1, 1, 0])
+  const afterOpacity = useTransform(scrollYProgress, [0.6, 0.76], [0, 1])
 
   return (
     <div ref={ref} className="relative h-[20rem] w-full sm:h-[23rem]">
       <motion.p
         data-scroll-fx="decor"
         style={mounted ? { opacity: beforeOpacity } : { opacity: 0 }}
-        className="absolute inset-x-0 top-0 text-center text-[0.6875rem] font-semibold tracking-[0.22em] text-fog uppercase"
+        className="absolute inset-x-0 top-0 text-center text-[0.6875rem] font-semibold tracking-[0.22em] text-ink-faint uppercase"
       >
         Multiple sites
       </motion.p>
       <motion.p
         data-scroll-fx="reveal"
         style={mounted ? { opacity: afterOpacity } : undefined}
-        className="absolute inset-x-0 top-0 text-center text-[0.6875rem] font-semibold tracking-[0.22em] text-blue-300 uppercase"
+        className="absolute inset-x-0 top-0 text-center text-[0.6875rem] font-semibold tracking-[0.22em] text-blue-600 uppercase"
       >
         One umbrella
       </motion.p>
@@ -105,19 +105,19 @@ export function ContractMerge() {
             aria-hidden
             data-scroll-fx="decor"
             style={{ scale: ringScale, opacity: ringOpacity }}
-            className="absolute top-1/2 left-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/50"
+            className="absolute top-1/2 left-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-blue-400"
           />
         )}
 
         <motion.div
           data-scroll-fx="reveal"
           style={mounted ? { scale: contractScale, opacity: contractOpacity } : undefined}
-          className="glass ring-glow absolute top-1/2 left-1/2 w-60 -translate-x-1/2 -translate-y-1/2 rounded-3xl p-7 text-center"
+          className="absolute top-1/2 left-1/2 w-60 -translate-x-1/2 -translate-y-1/2 rounded-3xl border-2 border-blue-500 bg-canvas p-7 text-center shadow-[0_18px_40px_-16px_rgba(68,114,196,0.5)]"
         >
-          <p className="font-display text-[3rem] leading-none font-semibold tracking-[-0.05em] text-foam">
+          <p className="font-display text-[3rem] leading-none font-semibold tracking-[-0.05em] text-blue-600">
             1
           </p>
-          <p className="mt-2.5 text-[0.875rem] leading-snug text-mist">
+          <p className="mt-2.5 text-[0.875rem] leading-snug text-ink-muted">
             budget and contract
             <br />
             for multiple sites

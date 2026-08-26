@@ -50,7 +50,7 @@ export function BusinessModel() {
 
         {/* "a single budget and contract for multiple sites under one umbrella" */}
         <Reveal delay={0.1} amount={0.05}>
-          <div className="glass ring-glow relative mt-4 overflow-hidden rounded-5xl px-6 py-10 md:px-12">
+          <div className="relative mt-4 overflow-hidden rounded-5xl border border-line bg-surface-2 px-6 py-10 md:px-12">
             <div aria-hidden className="pointer-events-none absolute inset-0 grid-veil opacity-40" />
             <ContractMerge />
           </div>

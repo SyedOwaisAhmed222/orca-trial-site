@@ -39,7 +39,7 @@ export function PullQuote({
   return (
     <div className={className}>
       <p
-        className={`font-display font-semibold tracking-[-0.02em] text-foam text-balance ${scale}`}
+        className={`font-display font-semibold tracking-[-0.02em] text-ink text-balance ${scale}`}
       >
         {lead}
       </p>
@@ -55,9 +55,9 @@ export function PullQuote({
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <p className="pt-4 text-[0.9375rem] leading-relaxed text-mist text-pretty">
+            <p className="pt-4 text-[0.9375rem] leading-relaxed text-ink-muted text-pretty">
               {before}
-              <span className="text-foam">{lead}</span>
+              <span className="text-ink">{lead}</span>
               {after}
             </p>
           </motion.div>
@@ -69,11 +69,11 @@ export function PullQuote({
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={id}
-        className="group/more -mx-2 mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-[0.8125rem] font-medium text-blue-300 transition-colors hover:text-blue-200 sm:min-h-9"
+        className="group/more -mx-2 mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-[0.8125rem] font-medium text-blue-600 transition-colors hover:text-blue-700 sm:min-h-9"
       >
         <span
           aria-hidden
-          className="grid h-5 w-5 place-items-center rounded-full border border-blue-400/35 text-[0.75rem] leading-none transition-transform duration-300 group-hover/more:border-blue-400/60"
+          className="grid h-5 w-5 place-items-center rounded-full border border-blue-300 text-[0.75rem] leading-none transition-transform duration-300 group-hover/more:border-blue-400/60"
         >
           {open ? '−' : '+'}
         </span>

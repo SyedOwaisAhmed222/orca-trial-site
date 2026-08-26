@@ -1,30 +1,35 @@
 @import "tailwindcss";
 
 /* ────────────────────────────────────────────────────────────────
-   Orca Trial — "Deep Ocean" design system
-   Base is a near-black navy; the single accent is an aqua-to-cyan
-   ramp that carries every emphasis, glow and gradient on the site.
+   Orca Trial — light design system.
+
+   Orca's own assets are built for white: the logotype is #595959 on
+   white, and the twelve therapeutic illustrations are drawn on white.
+   The page follows them rather than fighting them.
+
+   Token names say what they are for, not what colour they happen to be:
+     canvas / surface / surface-2 / surface-3   backgrounds, light → lighter
+     ink / ink-muted / ink-faint                text, strong → weak
+     line                                        borders and rules
    ──────────────────────────────────────────────────────────────── */
 @theme {
-  /* ────────────────────────────────────────────────────────────
-     Brand colours sampled from the official logotype
-     (wp-content/uploads/2022/11/logo.png):
-       #4472C4  brand blue
-       #595959  brand grey
-     The ramp below is built around those two. Do not substitute.
-     ──────────────────────────────────────────────────────────── */
+  /* Brand colours sampled from the official logotype
+     (wp-content/uploads/2022/11/logo.png): #4472C4 blue, #595959 grey.
+     Do not substitute. */
   --color-brand: #4472c4;
   --color-brand-grey: #595959;
 
-  --color-abyss: #070a10;
-  --color-hull: #0e131c;
-  --color-deep: #141b28;
-  --color-shelf: #1d2635;
+  --color-canvas: #ffffff;
+  --color-surface: #f5f7fb;
+  --color-surface-2: #eef2f8;
+  --color-surface-3: #e3e9f3;
 
-  --color-foam: #eef2f8;
-  --color-mist: #a8b2c2;
-  --color-fog: #78828f;
+  --color-ink: #10192b;
+  --color-ink-muted: #4b5769;
+  --color-ink-faint: #626d82;
+  --color-line: #d8e0ed;
 
+  --color-blue-50: #f2f6fd;
   --color-blue-100: #dfe8f8;
   --color-blue-200: #bccdf0;
   --color-blue-300: #93aee4;
@@ -32,6 +37,7 @@
   --color-blue-500: #4472c4;
   --color-blue-600: #3a61a8;
   --color-blue-700: #2f4f8a;
+  --color-blue-800: #24406f;
 
   --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -40,6 +46,9 @@
   --radius-5xl: 2.75rem;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --shadow-card: 0 1px 2px rgba(16, 25, 43, 0.04), 0 8px 24px -12px rgba(16, 25, 43, 0.12);
+  --shadow-card-hover: 0 2px 4px rgba(16, 25, 43, 0.06), 0 18px 40px -16px rgba(16, 25, 43, 0.2);
 
   --animate-drift: drift 24s ease-in-out infinite;
   --animate-drift-slow: drift 34s ease-in-out infinite reverse;
@@ -106,12 +115,12 @@
 
 /* ── Base ─────────────────────────────────────────────────────── */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --nav-h: 4.5rem;
 }
 
 * {
-  border-color: color-mix(in oklab, var(--color-foam) 10%, transparent);
+  border-color: var(--color-line);
 }
 
 html {
@@ -129,16 +138,16 @@ body {
 }
 
 body {
-  background-color: var(--color-abyss);
-  color: var(--color-foam);
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--color-blue-400) 35%, transparent);
-  color: var(--color-blue-100);
+  background: color-mix(in oklab, var(--color-blue-500) 22%, transparent);
+  color: var(--color-blue-800);
 }
 
 :focus-visible {
@@ -153,15 +162,15 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-abyss);
+  background: var(--color-canvas);
 }
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in oklab, var(--color-blue-1000) 40%, var(--color-deep));
+  background: color-mix(in oklab, var(--color-blue-500) 40%, var(--color-surface-2));
   border-radius: 999px;
-  border: 2px solid var(--color-abyss);
+  border: 2px solid var(--color-canvas);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-blue-1000);
+  background: var(--color-blue-500);
 }
 
 /* ── Utilities ────────────────────────────────────────────────── */
@@ -179,84 +188,50 @@ body {
 }
 
 /* Frosted panel used by cards, the nav and the form */
+/* A raised card. On light, depth comes from a real border and a soft shadow —
+   a translucent blur over a white page just looks like nothing. */
 @utility glass {
-  background: linear-gradient(
-    150deg,
-    color-mix(in oklab, var(--color-foam) 7%, transparent),
-    color-mix(in oklab, var(--color-foam) 2%, transparent)
-  );
-  border: 1px solid color-mix(in oklab, var(--color-foam) 9%, transparent);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  background-color: var(--color-canvas);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
 }
 
 @utility text-gradient {
   background-image: linear-gradient(
     100deg,
-    var(--color-foam) 0%,
-    var(--color-blue-200) 42%,
-    var(--color-blue-400) 70%,
-    var(--color-blue-300) 100%
+    var(--color-blue-700) 0%,
+    var(--color-blue-500) 45%,
+    var(--color-blue-400) 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
 
-/* Hairline gradient border that lights up on hover — used on every card */
+/* Hover affordance for cards: lift the shadow and warm the border toward
+   brand blue. Replaces the dark theme's glowing hairline, which is invisible
+   on white. */
 @utility ring-glow {
-  position: relative;
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklab, var(--color-blue-400) 55%, transparent),
-      transparent 40%,
-      transparent 60%,
-      color-mix(in oklab, var(--color-blue-300) 40%, transparent)
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.5s var(--ease-out-expo);
-    pointer-events: none;
-  }
-  &:hover::after,
-  &:focus-within::after {
-    opacity: 1;
+  transition:
+    box-shadow 0.45s var(--ease-out-expo),
+    border-color 0.45s var(--ease-out-expo);
+  &:hover,
+  &:focus-within {
+    border-color: color-mix(in oklab, var(--color-blue-500) 45%, var(--color-line));
+    box-shadow: var(--shadow-card-hover);
   }
 }
 
-/* Faint blueprint grid, faded out toward the edges */
+/* Faint blueprint grid, faded out toward the edges. */
 @utility grid-veil {
   background-image:
-    linear-gradient(
-      to right,
-      color-mix(in oklab, var(--color-foam) 5%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--color-foam) 5%, transparent) 1px,
-      transparent 1px
-    );
+    linear-gradient(to right, color-mix(in oklab, var(--color-blue-500) 9%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-blue-500) 9%, transparent) 1px, transparent 1px);
   background-size: 68px 68px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 78%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 78%);
 }
 
-/* Vertical rhythm. Sections are not all equally important: `section-pad`
-   is the default, `section-pad-tight` joins a section to the one above it. */
 @utility section-pad {
   padding-block: 4.5rem;
   @media (min-width: 768px) {
@@ -267,8 +242,8 @@ body {
 /* Alternating tone band. Without it, consecutive sections read as one
    undifferentiated column of cards separated by dead space. */
 @utility section-band {
-  background-color: color-mix(in oklab, var(--color-hull) 55%, transparent);
-  border-block: 1px solid color-mix(in oklab, var(--color-foam) 6%, transparent);
+  background-color: var(--color-surface);
+  border-block: 1px solid var(--color-line);
 }
 
 @utility section-pad-tight {
@@ -283,10 +258,10 @@ body {
   align-items: center;
   gap: 0.6rem;
   font-size: 0.6875rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-blue-300);
+  color: var(--color-blue-600);
 }
 
 /* Edge-fade for marquees and long scroll rows */

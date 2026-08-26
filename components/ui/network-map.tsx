@@ -37,7 +37,7 @@ export function NetworkMap({
         <defs>
           <radialGradient id={glow}>
             <stop offset="0%" stopColor="var(--color-blue-300)" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="var(--color-blue-1000)" stopOpacity="0" />
+            <stop offset="100%" stopColor="var(--color-blue-500)" stopOpacity="0" />
           </radialGradient>
           <linearGradient id={link} x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="var(--color-blue-400)" stopOpacity="0.5" />
@@ -45,7 +45,7 @@ export function NetworkMap({
           </linearGradient>
         </defs>
 
-        <g stroke={'url(#' + link + ')'} strokeWidth="0.16">
+        <g stroke={'url(#' + link + ')'} strokeWidth="0.26">
           {LINKS.map(([a, b], i) => (
             <motion.line
               key={'l' + i}
@@ -78,7 +78,7 @@ export function NetworkMap({
                 cx={x}
                 cy={y}
                 r={w === 2 ? 0.85 : 0.5}
-                fill={w === 2 ? 'var(--color-blue-200)' : 'var(--color-blue-400)'}
+                fill={w === 2 ? 'var(--color-blue-700)' : 'var(--color-blue-500)'}
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}

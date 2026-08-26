@@ -17,13 +17,13 @@ export default function NotFound() {
           <Logo />
         </a>
 
-        <p className="mt-12 font-display text-[5rem] leading-none font-semibold tracking-[-0.05em] text-foam/10">
+        <p className="mt-12 font-display text-[5rem] leading-none font-semibold tracking-[-0.05em] text-ink/10">
           404
         </p>
-        <h1 className="mt-4 font-display text-3xl leading-tight font-semibold tracking-[-0.03em] text-foam text-balance">
+        <h1 className="mt-4 font-display text-3xl leading-tight font-semibold tracking-[-0.03em] text-ink text-balance">
           That page has moved on.
         </h1>
-        <p className="mt-4 text-[0.9375rem] leading-relaxed text-mist text-pretty">
+        <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink-muted text-pretty">
           The link you followed does not exist. Everything about the Orca network — sites,
           sponsors, therapeutic areas and registration — lives on the home page.
         </p>
@@ -38,7 +38,7 @@ export default function NotFound() {
           </ButtonLink>
         </div>
 
-        <p className="mt-10 text-[0.8125rem] text-fog">
+        <p className="mt-10 text-[0.8125rem] text-ink-faint">
           Or reach us at{' '}
           <a
             href={'mailto:' + site.email}

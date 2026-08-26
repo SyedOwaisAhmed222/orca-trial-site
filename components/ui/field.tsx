@@ -5,15 +5,15 @@ import type {
 } from 'react'
 
 const control =
-  'peer w-full rounded-2xl border bg-foam/4 px-4 pt-6 pb-2.5 text-[0.9375rem] text-foam transition-colors duration-300 outline-none placeholder:text-transparent focus:bg-foam/7'
+  'peer w-full rounded-2xl border bg-ink/4 px-4 pt-6 pb-2.5 text-[0.9375rem] text-ink transition-colors duration-300 outline-none placeholder:text-transparent focus:bg-ink/7'
 
 // Applied explicitly rather than via an `aria-[invalid]` variant, so the invalid
 // state cannot lose a specificity race with the hover/focus border rules.
-const borderOk = 'border-foam/10 hover:border-foam/18 focus:border-blue-400/55'
+const borderOk = 'border-ink/10 hover:border-ink/18 focus:border-blue-400/55'
 const borderBad = 'border-red-400/70 bg-red-400/5 hover:border-red-400/80 focus:border-red-400'
 
 const labelCls =
-  'pointer-events-none absolute top-2 left-4 text-[0.6875rem] font-medium tracking-[0.1em] text-fog uppercase transition-all duration-300 peer-placeholder-shown:top-4.5 peer-placeholder-shown:text-[0.875rem] peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:top-2 peer-focus:text-[0.6875rem] peer-focus:tracking-[0.1em] peer-focus:text-blue-300 peer-focus:uppercase'
+  'pointer-events-none absolute top-2 left-4 text-[0.6875rem] font-medium tracking-[0.1em] text-ink-faint uppercase transition-all duration-300 peer-placeholder-shown:top-4.5 peer-placeholder-shown:text-[0.875rem] peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:top-2 peer-focus:text-[0.6875rem] peer-focus:tracking-[0.1em] peer-focus:text-blue-600 peer-focus:uppercase'
 
 function Error({ msg, id }: { msg?: string; id?: string }) {
   if (!msg) return null
@@ -72,7 +72,7 @@ export function SelectField({
             control +
             ' ' +
             borderOk +
-            ' appearance-none cursor-pointer pr-11 text-foam [&>option]:bg-hull [&>option]:text-foam'
+            ' appearance-none cursor-pointer pr-11 text-ink [&>option]:bg-surface [&>option]:text-ink'
           }
           {...props}
         >
@@ -85,14 +85,14 @@ export function SelectField({
         </select>
         <label
           htmlFor={name}
-          className="pointer-events-none absolute top-2 left-4 text-[0.6875rem] font-medium tracking-[0.1em] text-fog uppercase"
+          className="pointer-events-none absolute top-2 left-4 text-[0.6875rem] font-medium tracking-[0.1em] text-ink-faint uppercase"
         >
           {label}
         </label>
         <svg
           aria-hidden
           viewBox="0 0 24 24"
-          className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-fog"
+          className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-ink-faint"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.6"

@@ -143,7 +143,7 @@ export function Register() {
                 <span className="section-label">{copy.eyebrow}</span>
                 <span
                   aria-hidden
-                  className="h-px flex-1 bg-linear-to-r from-foam/16 via-foam/8 to-foam/0"
+                  className="h-px flex-1 bg-linear-to-r from-ink/16 via-ink/8 to-ink/0"
                 />
               </div>
 
@@ -158,14 +158,14 @@ export function Register() {
                   <h2 className="mt-5 font-display text-[clamp(2rem,4.2vw,3.2rem)] leading-[1.05] font-semibold tracking-[-0.035em] text-balance">
                     {copy.title}
                   </h2>
-                  <p className="mt-6 text-[1.0625rem] leading-relaxed text-mist text-pretty">
+                  <p className="mt-6 text-[1.0625rem] leading-relaxed text-ink-muted text-pretty">
                     {copy.body}
                   </p>
 
                   <ul className="mt-9 grid gap-3.5">
                     {copy.points.map((p) => (
-                      <li key={p} className="flex items-start gap-3 text-[0.9375rem] text-mist">
-                        <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-400/12 text-blue-300">
+                      <li key={p} className="flex items-start gap-3 text-[0.9375rem] text-ink-muted">
+                        <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-100 text-blue-600">
                           <Icon.check className="h-3 w-3" strokeWidth={2.4} />
                         </span>
                         {p}
@@ -175,25 +175,25 @@ export function Register() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="mt-10 grid gap-3 border-t border-foam/8 pt-8 text-sm">
-                <p className="flex items-center gap-2.5 text-fog">
+              <div className="mt-10 grid gap-3 border-t border-ink/8 pt-8 text-sm">
+                <p className="flex items-center gap-2.5 text-ink-faint">
                   <Icon.mail className="h-4 w-4 shrink-0 text-blue-400" />
                   Prefer email?{' '}
                   <a
                     href={'mailto:' + site.email}
                     data-cta="form-email"
-                    className="rounded px-0.5 py-1 text-blue-300 underline-offset-4 hover:underline"
+                    className="rounded px-0.5 py-1 text-blue-600 underline-offset-4 hover:underline"
                   >
                     {site.email}
                   </a>
                 </p>
-                <p className="flex items-center gap-2.5 text-fog">
+                <p className="flex items-center gap-2.5 text-ink-faint">
                   <Icon.phone className="h-4 w-4 shrink-0 text-blue-400" />
                   Or call{' '}
                   <a
                     href={'tel:' + site.phoneHref}
                     data-cta="form-phone"
-                    className="rounded px-0.5 py-1 text-blue-300 underline-offset-4 hover:underline"
+                    className="rounded px-0.5 py-1 text-blue-600 underline-offset-4 hover:underline"
                   >
                     {site.phone}
                   </a>
@@ -209,7 +209,7 @@ export function Register() {
               <div
                 role="group"
                 aria-label="Who are you?"
-                className="relative grid grid-cols-2 gap-1 rounded-full border border-foam/9 bg-abyss/50 p-1"
+                className="relative grid grid-cols-2 gap-1 rounded-full border border-ink/9 bg-canvas/50 p-1"
               >
                 {(['site', 'sponsor'] as const).map((a) => {
                   const isActive = a === audience
@@ -222,14 +222,14 @@ export function Register() {
                       onClick={() => switchTo(a)}
                       className={
                         'relative rounded-full px-4 py-2.5 text-[0.8125rem] font-semibold transition-colors duration-300 ' +
-                        (isActive ? 'text-abyss' : 'text-mist hover:text-foam')
+                        (isActive ? 'text-canvas' : 'text-ink-muted hover:text-ink')
                       }
                     >
                       {isActive && (
                         <motion.span
                           layoutId="audience-pill"
                           aria-hidden
-                          className="absolute inset-0 rounded-full bg-linear-to-r from-blue-400 to-blue-300 shadow-[0_6px_20px_-6px_var(--color-blue-1000)]"
+                          className="absolute inset-0 rounded-full bg-linear-to-r from-blue-400 to-blue-300 shadow-[0_6px_20px_-6px_var(--color-blue-500)]"
                           transition={{ type: 'spring', stiffness: 400, damping: 34 }}
                         />
                       )}
@@ -254,17 +254,17 @@ export function Register() {
                     className="flex min-h-[24rem] flex-col items-center justify-center text-center"
                     role="status"
                   >
-                    <span className="grid h-16 w-16 place-items-center rounded-full border border-blue-400/30 bg-blue-400/10 text-blue-300">
+                    <span className="grid h-16 w-16 place-items-center rounded-full border border-blue-200 bg-blue-50 text-blue-600">
                       <Icon.check className="h-7 w-7" strokeWidth={2} />
                     </span>
-                    <h3 className="mt-7 font-display text-2xl font-semibold tracking-[-0.02em] text-foam">
+                    <h3 className="mt-7 font-display text-2xl font-semibold tracking-[-0.02em] text-ink">
                       Thank you — we have it
                     </h3>
-                    <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-mist">
+                    <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-ink-muted">
                       A member of the Orca team will be in touch. If it is urgent, call{' '}
                       <a
                         href={'tel:' + site.phoneHref}
-                        className="rounded px-0.5 py-1 text-blue-300 underline-offset-4 hover:underline"
+                        className="rounded px-0.5 py-1 text-blue-600 underline-offset-4 hover:underline"
                       >
                         {site.phone}
                       </a>
@@ -356,7 +356,7 @@ export function Register() {
                             type="button"
                             onClick={() => setShowOptional((v) => !v)}
                             aria-expanded={showOptional}
-                            className="-mx-2 flex min-h-11 items-center gap-2 rounded-lg px-2 text-[0.8125rem] font-medium text-blue-300 transition-colors hover:text-blue-200 sm:min-h-9"
+                            className="-mx-2 flex min-h-11 items-center gap-2 rounded-lg px-2 text-[0.8125rem] font-medium text-blue-600 transition-colors hover:text-blue-700 sm:min-h-9"
                           >
                             <Icon.arrowDown
                               className={
@@ -509,7 +509,7 @@ export function Register() {
                     )}
 
                     <div className="mt-2 flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-                      <p className="text-[0.75rem] leading-relaxed text-fog">
+                      <p className="text-[0.75rem] leading-relaxed text-ink-faint">
                         We only use these details to contact you about study opportunities. No
                         obligation, no exclusivity.
                       </p>

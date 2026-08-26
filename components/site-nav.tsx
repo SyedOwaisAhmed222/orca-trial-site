@@ -80,7 +80,7 @@ export function SiteNav() {
         className={
           'fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ' +
           (scrolled
-            ? 'border-b border-foam/8 bg-abyss/72 backdrop-blur-xl backdrop-saturate-150'
+            ? 'border-b border-ink/8 bg-canvas/72 backdrop-blur-xl backdrop-saturate-150'
             : 'border-b border-transparent')
         }
       >
@@ -99,14 +99,14 @@ export function SiteNav() {
                   aria-current={isActive ? 'true' : undefined}
                   className={
                     'relative rounded-full px-4 py-2 text-[0.8125rem] font-medium transition-colors duration-300 ' +
-                    (isActive ? 'text-foam' : 'text-mist hover:text-foam')
+                    (isActive ? 'text-ink' : 'text-ink-muted hover:text-ink')
                   }
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-pill"
                       aria-hidden
-                      className="absolute inset-0 rounded-full border border-blue-400/25 bg-foam/6"
+                      className="absolute inset-0 rounded-full border border-blue-300 bg-ink/6"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -122,7 +122,7 @@ export function SiteNav() {
             <a
               href={'tel:' + site.phoneHref}
               data-cta="nav-phone"
-              className="hidden items-center gap-2 rounded-full px-3 py-2 text-[0.8125rem] font-medium text-mist transition-colors hover:text-foam xl:flex"
+              className="hidden items-center gap-2 rounded-full px-3 py-2 text-[0.8125rem] font-medium text-ink-muted transition-colors hover:text-ink xl:flex"
             >
               <Icon.phone className="h-4 w-4 text-blue-400" />
               {site.phone}
@@ -148,7 +148,7 @@ export function SiteNav() {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="glass grid h-11 w-11 place-items-center rounded-full text-foam transition-colors hover:bg-foam/10 lg:hidden"
+              className="glass grid h-11 w-11 place-items-center rounded-full text-ink transition-colors hover:bg-ink/10 lg:hidden"
               aria-label="Open menu"
               aria-expanded={open}
             >
@@ -174,11 +174,11 @@ export function SiteNav() {
             transition={{ duration: 0.25 }}
           >
             <div
-              className="absolute inset-0 bg-abyss/85 backdrop-blur-xl"
+              className="absolute inset-0 bg-canvas/85 backdrop-blur-xl"
               onClick={() => setOpen(false)}
             />
             <motion.div
-              className="absolute inset-x-3 top-3 rounded-4xl border border-foam/10 bg-hull/95 p-6 shadow-2xl"
+              className="absolute inset-x-3 top-3 rounded-4xl border border-ink/10 bg-surface/95 p-6 shadow-2xl"
               initial={{ y: -28, opacity: 0, scale: 0.97 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: -20, opacity: 0, scale: 0.98 }}
@@ -191,7 +191,7 @@ export function SiteNav() {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-foam/10 text-mist transition-colors hover:text-foam"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-ink/10 text-ink-muted transition-colors hover:text-ink"
                   aria-label="Close menu"
                 >
                   <Icon.close className="h-5 w-5" />
@@ -207,7 +207,7 @@ export function SiteNav() {
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.06 + i * 0.05, duration: 0.4 }}
-                    className="flex items-center justify-between rounded-2xl px-4 py-3.5 font-display text-lg font-medium text-foam transition-colors hover:bg-foam/6"
+                    className="flex items-center justify-between rounded-2xl px-4 py-3.5 font-display text-lg font-medium text-ink transition-colors hover:bg-ink/6"
                   >
                     {item.label}
                     <Icon.arrowRight className="h-4 w-4 text-blue-400" />
@@ -235,16 +235,16 @@ export function SiteNav() {
                   setOpen(false)
                   openEnquiry('sponsor')
                 }}
-                className="mt-2 w-full rounded-full border border-foam/10 py-3 text-[0.875rem] font-medium text-mist transition-colors hover:text-foam"
+                className="mt-2 w-full rounded-full border border-ink/10 py-3 text-[0.875rem] font-medium text-ink-muted transition-colors hover:text-ink"
               >
                 I&apos;m a sponsor / CRO
               </button>
 
-              <div className="mt-6 grid gap-2 border-t border-foam/8 pt-5 text-sm text-mist">
-                <a href={'mailto:' + site.email} className="flex items-center gap-2.5 hover:text-foam">
+              <div className="mt-6 grid gap-2 border-t border-ink/8 pt-5 text-sm text-ink-muted">
+                <a href={'mailto:' + site.email} className="flex items-center gap-2.5 hover:text-ink">
                   <Icon.mail className="h-4 w-4 text-blue-400" /> {site.email}
                 </a>
-                <a href={'tel:' + site.phoneHref} className="flex items-center gap-2.5 hover:text-foam">
+                <a href={'tel:' + site.phoneHref} className="flex items-center gap-2.5 hover:text-ink">
                   <Icon.phone className="h-4 w-4 text-blue-400" /> {site.phone}
                 </a>
               </div>

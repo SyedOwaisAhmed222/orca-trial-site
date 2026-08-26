@@ -68,7 +68,7 @@ export function Sponsors() {
                   <span
                     className={
                       'font-display text-sm font-semibold tabular-nums transition-colors duration-500 ' +
-                      (i === active ? 'text-blue-300' : 'text-fog')
+                      (i === active ? 'text-blue-600' : 'text-ink-faint')
                     }
                   >
                     {p.n}
@@ -76,7 +76,7 @@ export function Sponsors() {
                   <span
                     className={
                       'h-px flex-1 transition-colors duration-500 ' +
-                      (i === active ? 'bg-blue-400/50' : 'bg-foam/8')
+                      (i === active ? 'bg-blue-400/50' : 'bg-ink/8')
                     }
                   />
                 </div>
@@ -84,7 +84,7 @@ export function Sponsors() {
                 <h3
                   className={
                     'mt-4 font-display text-[1.5rem] leading-tight font-semibold tracking-[-0.03em] transition-colors duration-500 md:text-[1.75rem] ' +
-                    (i === active ? 'text-foam' : 'text-mist')
+                    (i === active ? 'text-ink' : 'text-ink-muted')
                   }
                 >
                   {p.title}
@@ -109,7 +109,7 @@ export function Sponsors() {
 
           {/* Sticky diagram */}
           <div className="hidden lg:block">
-            <div className="glass ring-glow sticky top-28 aspect-4/3 overflow-hidden rounded-5xl p-4">
+            <div className="sticky top-28 aspect-4/3 overflow-hidden rounded-5xl border border-line bg-surface-2 p-4">
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 grid-veil opacity-45"
@@ -133,7 +133,7 @@ export function Sponsors() {
                     key={p.n}
                     className={
                       'h-1 rounded-full transition-all duration-500 ' +
-                      (i === active ? 'w-6 bg-blue-300' : 'w-1.5 bg-foam/20')
+                      (i === active ? 'w-6 bg-blue-300' : 'w-1.5 bg-ink/20')
                     }
                   />
                 ))}

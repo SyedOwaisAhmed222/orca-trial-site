@@ -6,20 +6,20 @@ export function SiteFooter() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative border-t border-foam/8 bg-hull/30">
+    <footer className="relative border-t border-ink/8 bg-surface/30">
       <div className="container-page pt-16 pb-16 max-lg:pb-28">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.2fr)]">
           <div>
             <a href="#top" className="flex items-center gap-2.5" aria-label="Orca Trial — back to top">
               <Logo />
             </a>
-            <p className="mt-5 max-w-xs text-[0.875rem] leading-relaxed text-fog text-pretty">
+            <p className="mt-5 max-w-xs text-[0.875rem] leading-relaxed text-ink-faint text-pretty">
               {site.intro}
             </p>
           </div>
 
           <nav aria-label="Footer">
-            <h3 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-fog uppercase">
+            <h3 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-ink-faint uppercase">
               Menu
             </h3>
             <ul className="mt-3 grid">
@@ -27,7 +27,7 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="-mx-2 flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-mist transition-colors hover:text-blue-300 sm:min-h-9"
+                    className="-mx-2 flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-ink-muted transition-colors hover:text-blue-600 sm:min-h-9"
                   >
                     {item.label}
                   </a>
@@ -37,19 +37,19 @@ export function SiteFooter() {
           </nav>
 
           <div>
-            <h3 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-fog uppercase">
+            <h3 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-ink-faint uppercase">
               Areas
             </h3>
             <ul className="mt-5 grid gap-2.5">
               {therapeuticAreas.slice(0, 6).map((a) => (
-                <li key={a.name} className="text-[0.875rem] text-mist">
+                <li key={a.name} className="text-[0.875rem] text-ink-muted">
                   {a.name}
                 </li>
               ))}
               <li>
                 <a
                   href="#areas"
-                  className="-mx-2 mt-1 inline-flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-blue-300 underline-offset-4 hover:underline sm:min-h-0 sm:mt-0"
+                  className="-mx-2 mt-1 inline-flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-blue-600 underline-offset-4 hover:underline sm:min-h-0 sm:mt-0"
                 >
                   All 12 areas
                 </a>
@@ -58,10 +58,10 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h3 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-fog uppercase">
+            <h3 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-ink-faint uppercase">
               Get in touch
             </h3>
-            <ul className="mt-5 grid gap-3.5 text-[0.875rem] text-mist">
+            <ul className="mt-5 grid gap-3.5 text-[0.875rem] text-ink-muted">
               <li className="flex items-start gap-2.5">
                 <Icon.pin className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
                 <span className="leading-relaxed">{site.address}</span>
@@ -70,7 +70,7 @@ export function SiteFooter() {
                 <a
                   href={'mailto:' + site.email}
                   data-cta="footer-email"
-                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-blue-300 sm:min-h-0 sm:py-0.5"
+                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-blue-600 sm:min-h-0 sm:py-0.5"
                 >
                   <Icon.mail className="h-4 w-4 shrink-0 text-blue-400" />
                   {site.email}
@@ -80,7 +80,7 @@ export function SiteFooter() {
                 <a
                   href={'tel:' + site.phoneHref}
                   data-cta="footer-phone"
-                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-blue-300 sm:min-h-0 sm:py-0.5"
+                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-blue-600 sm:min-h-0 sm:py-0.5"
                 >
                   <Icon.phone className="h-4 w-4 shrink-0 text-blue-400" />
                   {site.phone}
@@ -94,7 +94,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-foam/8 pt-8 text-[0.8125rem] text-fog sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-ink/8 pt-8 text-[0.8125rem] text-ink-faint sm:flex-row">
           <p>
             © {year} {site.name}. All rights reserved.
           </p>

@@ -29,7 +29,7 @@ export function WhyOrca() {
             return (
               <RevealItem key={item.body} className={item.span}>
                 <SpotlightCard className="h-full rounded-4xl p-7 hover:-translate-y-1">
-                  <span className="grid h-11 w-11 place-items-center rounded-2xl border border-blue-400/22 bg-blue-400/8 text-blue-300 transition-colors duration-500 group-hover/spot:bg-blue-400/14">
+                  <span className="grid h-11 w-11 place-items-center rounded-2xl border border-blue-200 bg-blue-50 text-blue-600 transition-colors duration-500 group-hover/spot:bg-blue-100">
                     <Glyph className="h-5 w-5" />
                   </span>
                   <PullQuote className="mt-5" lead={item.lead} body={item.body} />
@@ -47,8 +47,8 @@ export function WhyOrca() {
                 <h3 className="section-label">{a.eyebrow}</h3>
                 <ul className="mt-6 grid gap-4">
                   {a.points.map((p) => (
-                    <li key={p} className="flex items-start gap-3 text-[1.0625rem] text-foam">
-                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-400/12 text-blue-300">
+                    <li key={p} className="flex items-start gap-3 text-[1.0625rem] text-ink">
+                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-100 text-blue-600">
                         <Icon.check className="h-3 w-3" strokeWidth={2.4} />
                       </span>
                       {p}
@@ -60,7 +60,7 @@ export function WhyOrca() {
                   type="button"
                   data-cta={'why-' + a.key}
                   onClick={() => openEnquiry(a.key === 'sponsors' ? 'sponsor' : 'site')}
-                  className="group/cta mt-8 inline-flex items-center gap-2 text-[0.875rem] font-semibold text-blue-300 transition-colors hover:text-blue-200"
+                  className="group/cta mt-8 inline-flex items-center gap-2 text-[0.875rem] font-semibold text-blue-600 transition-colors hover:text-blue-700"
                 >
                   {a.key === 'sponsors' ? 'Request site feasibility' : 'Register your site'}
                   <Icon.arrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />

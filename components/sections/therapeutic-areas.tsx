@@ -20,7 +20,7 @@ export function TherapeuticAreas() {
         <RevealGroup className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {therapeuticAreas.map((area) => (
             <RevealItem key={area.name}>
-              <div className="glass ring-glow group flex h-full flex-col items-center gap-4 rounded-3xl p-6 text-center transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:bg-foam/6">
+              <div className="glass ring-glow group flex h-full flex-col items-center gap-4 rounded-3xl p-6 text-center transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:bg-ink/6">
                 <Image
                   src={area.image}
                   alt=""
@@ -28,7 +28,7 @@ export function TherapeuticAreas() {
                   height={282}
                   className="h-16 w-16 object-contain transition-transform duration-500 group-hover:scale-105"
                 />
-                <h3 className="font-display text-[0.9375rem] leading-snug font-medium tracking-[-0.01em] text-foam">
+                <h3 className="font-display text-[0.9375rem] leading-snug font-medium tracking-[-0.01em] text-ink">
                   {area.name}
                 </h3>
               </div>

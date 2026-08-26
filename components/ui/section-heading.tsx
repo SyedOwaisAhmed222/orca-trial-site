@@ -32,7 +32,7 @@ export function SectionHeading({
           <span className="section-label">{label}</span>
           <span
             aria-hidden
-            className="h-px flex-1 bg-linear-to-r from-foam/16 via-foam/8 to-foam/0"
+            className="h-px flex-1 bg-linear-to-r from-ink/16 via-ink/8 to-ink/0"
           />
         </div>
       </Reveal>
@@ -46,7 +46,7 @@ export function SectionHeading({
 
         {body ? (
           <Reveal delay={0.16}>
-            <p className="max-w-prose text-[1rem] leading-relaxed text-mist text-pretty lg:pb-1.5">
+            <p className="max-w-prose text-[1rem] leading-relaxed text-ink-muted text-pretty lg:pb-1.5">
               {body}
             </p>
           </Reveal>

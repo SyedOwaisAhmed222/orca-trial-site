@@ -75,12 +75,12 @@ export function NetworkCanvas({ className = '' }: { className?: string }) {
       >
         <defs>
           <radialGradient id="canvas-glow">
-            <stop offset="0%" stopColor="var(--color-blue-200)" stopOpacity="0.9" />
+            <stop offset="0%" stopColor="var(--color-blue-400)" stopOpacity="0.55" />
             <stop offset="100%" stopColor="var(--color-blue-500)" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="canvas-link" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="var(--color-blue-400)" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="var(--color-blue-600)" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="var(--color-blue-400)" stopOpacity="0.4" />
           </linearGradient>
         </defs>
 
@@ -94,8 +94,8 @@ export function NetworkCanvas({ className = '' }: { className?: string }) {
                 y1={NODES[a][1]}
                 x2={NODES[b][0]}
                 y2={NODES[b][1]}
-                stroke={lit ? 'var(--color-blue-200)' : 'url(#canvas-link)'}
-                strokeWidth={lit ? 0.3 : 0.16}
+                stroke={lit ? 'var(--color-blue-700)' : 'url(#canvas-link)'}
+                strokeWidth={lit ? 0.5 : 0.26}
                 initial={{ pathLength: 0, opacity: 0 }}
                 whileInView={{ pathLength: 1, opacity: 1 }}
                 viewport={{ once: true }}
@@ -136,7 +136,7 @@ export function NetworkCanvas({ className = '' }: { className?: string }) {
                   cy={y}
                   r={active ? 1.5 : isHub ? 0.85 : 0.5}
                   fill={
-                    active || isHub ? 'var(--color-blue-200)' : 'var(--color-blue-400)'
+                    active || isHub ? 'var(--color-blue-700)' : 'var(--color-blue-500)'
                   }
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}

@@ -3,11 +3,13 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'reac
 type Variant = 'primary' | 'ghost' | 'outline'
 
 const styles: Record<Variant, string> = {
+  // Solid brand blue with white text: 6.1:1 against white, and it reads as a
+  // button from across the room. A gradient would only muddy that.
   primary:
-    'bg-linear-to-r from-blue-400 to-blue-300 text-abyss shadow-[0_10px_36px_-10px_var(--color-blue-1000)] hover:shadow-[0_16px_48px_-10px_var(--color-blue-400)] hover:brightness-110',
+    'bg-blue-500 text-white shadow-[0_8px_20px_-8px_rgba(68,114,196,0.65)] hover:bg-blue-600 hover:shadow-[0_12px_28px_-8px_rgba(68,114,196,0.75)]',
   outline:
-    'glass text-foam hover:bg-foam/10 hover:border-blue-400/45',
-  ghost: 'text-mist hover:text-foam hover:bg-foam/6',
+    'border border-line bg-canvas text-ink shadow-card hover:border-blue-400 hover:text-blue-700 hover:shadow-card-hover',
+  ghost: 'text-ink-muted hover:text-blue-700 hover:bg-blue-50',
 }
 
 const shared =
