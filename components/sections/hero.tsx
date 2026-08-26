@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { stats } from '@/lib/content'
 import { ButtonLink } from '../ui/button'
 import { Counter } from '../ui/counter'
@@ -16,15 +16,27 @@ export function Hero() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
 
+  // On phones the hero is taller than the viewport, so a scroll-linked fade
+  // dims the stat rail while it is still the thing being read. Parallax is a
+  // wide-screen flourish only.
+  const [wide, setWide] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const sync = () => setWide(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
+
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
+  const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.15])
 
   return (
     <section ref={ref} id="top" className="relative isolate overflow-hidden pt-[var(--nav-h)]">
       <div className="container-page relative">
         <motion.div
-          style={reduce ? undefined : { y, opacity }}
+          style={reduce || !wide ? undefined : { y, opacity }}
           className="flex min-h-[calc(100svh-var(--nav-h))] flex-col justify-center py-20 md:py-24"
         >
           <motion.div

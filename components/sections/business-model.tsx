@@ -6,12 +6,12 @@ import { SpotlightCard } from '../ui/spotlight-card'
 
 export function BusinessModel() {
   return (
-    <section id="model" className="relative scroll-mt-24 py-28 md:py-36">
+    <section id="model" className="relative scroll-mt-24 section-pad section-band">
       <SectionGlow className="-top-20 right-0 h-[38rem] w-[38rem]" color="var(--color-tide-500)" />
 
       <div className="container-page relative">
         <SectionHeading
-          align="center"
+          index="02"
           label="Only the best"
           title={
             <>
@@ -21,7 +21,7 @@ export function BusinessModel() {
           body="Two commitments hold the whole model together — and neither has an asterisk."
         />
 
-        <div className="mt-16 grid gap-4 lg:grid-cols-2">
+        <div className="mt-14 grid gap-4 lg:grid-cols-2">
           {businessModel.map((m, i) => (
             <Reveal key={m.kicker} delay={i * 0.12}>
               <SpotlightCard className="relative h-full rounded-5xl p-9 md:p-11">
@@ -45,7 +45,7 @@ export function BusinessModel() {
 
         {/* Process rail */}
         <Reveal delay={0.1}>
-          <ol className="mt-16 grid gap-px overflow-hidden rounded-4xl border border-foam/8 bg-foam/6 md:grid-cols-5">
+          <ol className="mt-14 grid gap-px overflow-hidden rounded-4xl border border-foam/8 bg-foam/6 md:grid-cols-5">
             {processSteps.map((step, i) => (
               <li
                 key={step.label}

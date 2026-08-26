@@ -17,7 +17,7 @@ const channels = [
 
 export function Contact() {
   return (
-    <section id="contact" className="relative scroll-mt-24 pt-10 pb-28 md:pb-36">
+    <section id="contact" className="relative scroll-mt-24 pt-4 pb-20 md:pt-8 md:pb-28">
       <SectionGlow className="-top-24 left-1/2 h-[34rem] w-[44rem] -translate-x-1/2" />
 
       <div className="container-page relative">

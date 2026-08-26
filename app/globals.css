@@ -100,13 +100,20 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Decorative glows deliberately bleed past the section edges. `clip` contains
+   them without creating a scroll container, so `position: sticky` inside the
+   page keeps working — `overflow-x: hidden` would break it. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background-color: var(--color-abyss);
   color: var(--color-foam);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
 }
 
 ::selection {
@@ -226,6 +233,29 @@ body {
   background-size: 68px 68px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 78%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 78%);
+}
+
+/* Vertical rhythm. Sections are not all equally important: `section-pad`
+   is the default, `section-pad-tight` joins a section to the one above it. */
+@utility section-pad {
+  padding-block: 4.5rem;
+  @media (min-width: 768px) {
+    padding-block: 6.5rem;
+  }
+}
+
+/* Alternating tone band. Without it, consecutive sections read as one
+   undifferentiated column of cards separated by dead space. */
+@utility section-band {
+  background-color: color-mix(in oklab, var(--color-hull) 55%, transparent);
+  border-block: 1px solid color-mix(in oklab, var(--color-foam) 6%, transparent);
+}
+
+@utility section-pad-tight {
+  padding-block: 3rem;
+  @media (min-width: 768px) {
+    padding-block: 4rem;
+  }
 }
 
 @utility section-label {

@@ -8,14 +8,14 @@ import { RevealGroup, RevealItem } from '../ui/reveal'
  */
 export function TrustBar() {
   return (
-    <section aria-label="What Orca guarantees" className="relative py-12 md:py-16">
+    <section aria-label="What Orca guarantees" className="relative border-y border-foam/7 bg-hull/20 py-8 md:py-10">
       <div className="container-page">
-        <RevealGroup className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <RevealGroup className="grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
           {guarantees.map((g) => {
             const Glyph = Icon[g.icon as keyof typeof Icon]
             return (
               <RevealItem key={g.label}>
-                <div className="glass flex h-full items-start gap-3.5 rounded-3xl p-5">
+                <div className="flex h-full items-start gap-3.5">
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-aqua-400/22 bg-aqua-400/8 text-aqua-300">
                     <Glyph className="h-4.5 w-4.5" />
                   </span>

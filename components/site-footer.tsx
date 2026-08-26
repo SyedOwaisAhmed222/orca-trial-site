@@ -7,7 +7,7 @@ export function SiteFooter() {
 
   return (
     <footer className="relative border-t border-foam/8 bg-hull/30">
-      <div className="container-page py-16">
+      <div className="container-page pt-16 pb-16 max-lg:pb-28">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.2fr)]">
           <div>
             <a href="#top" className="flex items-center gap-2.5">
@@ -24,25 +24,17 @@ export function SiteFooter() {
             <h3 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-fog uppercase">
               Menu
             </h3>
-            <ul className="mt-5 grid gap-2.5">
-              {nav.map((item) => (
+            <ul className="mt-3 grid">
+              {[...nav, { label: 'Register with us', href: '#register' }].map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="text-[0.875rem] text-mist transition-colors hover:text-aqua-300"
+                    className="-mx-2 flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-mist transition-colors hover:text-aqua-300 sm:min-h-9"
                   >
                     {item.label}
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href="#register"
-                  className="text-[0.875rem] text-mist transition-colors hover:text-aqua-300"
-                >
-                  Register with us
-                </a>
-              </li>
             </ul>
           </nav>
 
@@ -59,7 +51,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href="#areas"
-                  className="text-[0.875rem] text-aqua-300 underline-offset-4 hover:underline"
+                  className="-mx-2 mt-1 inline-flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-aqua-300 underline-offset-4 hover:underline sm:min-h-0 sm:mt-0"
                 >
                   All 12 areas
                 </a>
@@ -79,7 +71,8 @@ export function SiteFooter() {
               <li>
                 <a
                   href={'mailto:' + site.email}
-                  className="flex items-center gap-2.5 transition-colors hover:text-aqua-300"
+                  data-cta="footer-email"
+                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-aqua-300 sm:min-h-0 sm:py-0.5"
                 >
                   <Icon.mail className="h-4 w-4 shrink-0 text-aqua-400" />
                   {site.email}
@@ -88,7 +81,8 @@ export function SiteFooter() {
               <li>
                 <a
                   href={'tel:' + site.phoneHref}
-                  className="flex items-center gap-2.5 transition-colors hover:text-aqua-300"
+                  data-cta="footer-phone"
+                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-aqua-300 sm:min-h-0 sm:py-0.5"
                 >
                   <Icon.phone className="h-4 w-4 shrink-0 text-aqua-400" />
                   {site.phone}

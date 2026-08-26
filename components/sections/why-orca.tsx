@@ -10,11 +10,12 @@ import { SpotlightCard } from '../ui/spotlight-card'
 
 export function WhyOrca() {
   return (
-    <section id="why" className="relative scroll-mt-24 py-28 md:py-36">
+    <section id="why" className="relative scroll-mt-24 section-pad">
       <SectionGlow className="top-10 -left-40 h-[34rem] w-[34rem]" />
 
       <div className="container-page relative">
         <SectionHeading
+          index="01"
           label="Why choose Orca"
           title={
             <>
@@ -26,19 +27,19 @@ export function WhyOrca() {
         />
 
         {/* Bento */}
-        <RevealGroup className="mt-16 grid gap-4 lg:grid-cols-6">
+        <RevealGroup className="mt-14 grid gap-4 lg:grid-cols-6">
           {whyOrca.map((item) => {
             const Glyph = Icon[item.icon as keyof typeof Icon]
             return (
               <RevealItem key={item.title} className={item.span}>
-                <SpotlightCard className="h-full rounded-4xl p-8 hover:-translate-y-1">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl border border-aqua-400/22 bg-aqua-400/8 text-aqua-300 transition-colors duration-500 group-hover/spot:bg-aqua-400/14">
-                    <Glyph className="h-5.5 w-5.5" />
+                <SpotlightCard className="h-full rounded-4xl p-7 hover:-translate-y-1">
+                  <span className="grid h-11 w-11 place-items-center rounded-2xl border border-aqua-400/22 bg-aqua-400/8 text-aqua-300 transition-colors duration-500 group-hover/spot:bg-aqua-400/14">
+                    <Glyph className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-6 font-display text-xl font-semibold tracking-[-0.02em] text-foam">
+                  <h3 className="mt-5 font-display text-lg font-semibold tracking-[-0.02em] text-foam">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-mist text-pretty">
+                  <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-mist text-pretty">
                     {item.body}
                   </p>
                 </SpotlightCard>

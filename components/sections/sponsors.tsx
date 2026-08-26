@@ -20,11 +20,12 @@ export function Sponsors() {
   const active = sponsorPillars[openIndex]
 
   return (
-    <section id="sponsors" className="relative scroll-mt-24 py-28 md:py-36">
+    <section id="sponsors" className="relative scroll-mt-24 section-pad">
       <SectionGlow className="top-1/4 -left-56 h-[40rem] w-[40rem]" />
 
       <div className="container-page relative">
         <SectionHeading
+          index="03"
           label="One step solution"
           title={
             <>
@@ -35,7 +36,7 @@ export function Sponsors() {
           body="Orca brings you the end-to-end solution in clinical research — a single point of contact for identification, budget, contract and startup."
         />
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
+        <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
           {/* Selector */}
           <Reveal direction="left">
             <ul className="grid gap-2">
@@ -123,8 +124,8 @@ export function Sponsors() {
           </Reveal>
 
           {/* Detail panel */}
-          <Reveal direction="right" className="hidden lg:block">
-            <div className="glass ring-glow sticky top-28 overflow-hidden rounded-5xl p-10">
+          <Reveal direction="right" className="hidden lg:block lg:h-full">
+            <div className="glass ring-glow flex h-full flex-col overflow-hidden rounded-5xl p-10">
               <div
                 aria-hidden
                 className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[radial-gradient(circle,var(--color-aqua-500)_0%,transparent_66%)] opacity-22 blur-3xl"
@@ -149,7 +150,7 @@ export function Sponsors() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="mt-10 border-t border-foam/8 pt-8">
+              <div className="mt-auto border-t border-foam/8 pt-8">
                 <Button
                   data-cta="sponsors-panel"
                   onClick={() => openEnquiry('sponsor')}

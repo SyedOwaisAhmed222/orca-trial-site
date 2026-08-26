@@ -127,7 +127,7 @@ export function Register() {
   }
 
   return (
-    <section id="register" className="relative scroll-mt-24 py-28 md:py-36">
+    <section id="register" className="relative scroll-mt-24 section-pad">
       <SectionGlow className="top-1/4 left-1/2 h-[42rem] w-[46rem] -translate-x-1/2" />
 
       <div className="container-page relative">
@@ -179,7 +179,7 @@ export function Register() {
                   <a
                     href={'mailto:' + site.email}
                     data-cta="form-email"
-                    className="text-aqua-300 underline-offset-4 hover:underline"
+                    className="rounded px-0.5 py-1 text-aqua-300 underline-offset-4 hover:underline"
                   >
                     {site.email}
                   </a>
@@ -190,7 +190,7 @@ export function Register() {
                   <a
                     href={'tel:' + site.phoneHref}
                     data-cta="form-phone"
-                    className="text-aqua-300 underline-offset-4 hover:underline"
+                    className="rounded px-0.5 py-1 text-aqua-300 underline-offset-4 hover:underline"
                   >
                     {site.phone}
                   </a>
@@ -263,7 +263,7 @@ export function Register() {
                       urgent, call{' '}
                       <a
                         href={'tel:' + site.phoneHref}
-                        className="text-aqua-300 underline-offset-4 hover:underline"
+                        className="rounded px-0.5 py-1 text-aqua-300 underline-offset-4 hover:underline"
                       >
                         {site.phone}
                       </a>
@@ -355,7 +355,7 @@ export function Register() {
                             type="button"
                             onClick={() => setShowOptional((v) => !v)}
                             aria-expanded={showOptional}
-                            className="flex items-center gap-2 text-[0.8125rem] font-medium text-aqua-300 transition-colors hover:text-aqua-200"
+                            className="-mx-2 flex min-h-11 items-center gap-2 rounded-lg px-2 text-[0.8125rem] font-medium text-aqua-300 transition-colors hover:text-aqua-200 sm:min-h-9"
                           >
                             <Icon.arrowDown
                               className={

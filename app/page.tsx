@@ -1,7 +1,6 @@
 import { SiteNav } from '@/components/site-nav'
 import { SiteFooter } from '@/components/site-footer'
 import { Hero } from '@/components/sections/hero'
-import { Marquee } from '@/components/sections/marquee'
 import { TrustBar } from '@/components/sections/trust-bar'
 import { WhyOrca } from '@/components/sections/why-orca'
 import { BusinessModel } from '@/components/sections/business-model'
@@ -18,7 +17,6 @@ export default function HomePage() {
       <SiteNav />
       <main>
         <Hero />
-        <Marquee />
         <TrustBar />
         <WhyOrca />
         <BusinessModel />

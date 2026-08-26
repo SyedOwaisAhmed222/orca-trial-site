@@ -23,24 +23,47 @@ export function SiteNav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Highlight the nav item whose section currently owns the viewport.
+  // Highlight the section that owns the upper third of the viewport. A ratio
+  // race between two tall neighbours picks the wrong one on short screens, so
+  // this measures against a fixed read line instead.
   useEffect(() => {
-    const sections = nav
-      .map((n) => document.getElementById(n.href.slice(1)))
-      .filter((el): el is HTMLElement => Boolean(el))
+    let frame = 0
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (visible) setActive('#' + visible.target.id)
-      },
-      { rootMargin: '-45% 0px -50% 0px', threshold: [0, 0.25, 0.5, 1] },
-    )
+    const update = () => {
+      frame = 0
+      const line = window.innerHeight * 0.34
+      let current = ''
 
-    sections.forEach((s) => io.observe(s))
-    return () => io.disconnect()
+      for (const item of nav) {
+        const el = document.getElementById(item.href.slice(1))
+        if (!el) continue
+        const { top, bottom } = el.getBoundingClientRect()
+        if (top <= line && bottom > line) {
+          current = item.href
+          break
+        }
+      }
+
+      // Past the last section (footer) keep the final item lit.
+      if (!current && window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
+        current = nav[nav.length - 1].href
+      }
+
+      setActive(current)
+    }
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
   }, [])
 
   // Lock body scroll while the mobile sheet is open.
