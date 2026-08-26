@@ -1,7 +1,11 @@
 # Deploying to web.orcatrial.net
 
-Target: the shared **dev box** (Hetzner `orca-dev-server`, `167.233.116.149`),
-alongside the CRM's dev and uat environments.
+Target: the shared **dev box**, alongside the CRM's dev and uat environments.
+
+> This repository is public. Concrete infrastructure values — host address, SSH
+> user, key names — live in the private `orca-trial-deploy` repo and in the
+> GitHub Environment for each branch. Placeholders below are written as
+> `<DEV_HOST>` and `<DEPLOY_USER>`; substitute from there.
 
 Same shape as `orca-trial-frontend`: GitHub Actions builds, rsyncs
 `.next/standalone` to the server, pm2 runs it, nginx terminates TLS and proxies
@@ -14,9 +18,9 @@ Already in use on that box: `3001` dev-api, `3002` uat-api, `4000` dev-web,
 
 | Deploy dir | pm2 app | Port | Domain |
 | ---------- | ------- | ---- | ------ |
-| `/home/deploy/dev-site` | `orca-dev-site` | 4002 | web.orcatrial.net |
-| `/home/deploy/uat-site` | `orca-uat-site` | 4003 | — |
-| `/home/deploy/site` | `orca-prod-site` | 4002 | — |
+| `<HOME>/dev-site` | `orca-dev-site` | 4002 | web.orcatrial.net |
+| `<HOME>/uat-site` | `orca-uat-site` | 4003 | — |
+| `<HOME>/site` | `orca-prod-site` | 4002 | — |
 
 `ecosystem.config.js` derives the pm2 name and port from the directory
 basename, and throws if the directory is not one of those three — a wrong
@@ -33,13 +37,13 @@ Add an `A` record for `web` pointing at the dev box.
 
 | Type | Name | Value |
 | ---- | ---- | ----- |
-| A | `web` | `167.233.116.149` |
+| A | `web` | `<DEV_HOST>` |
 
 Wait for it to resolve before going near certbot — certbot proves domain
 ownership over HTTP and fails if DNS has not propagated:
 
 ```bash
-dig +short web.orcatrial.net      # must print 167.233.116.149
+dig +short web.orcatrial.net      # must print <DEV_HOST>
 ```
 
 ## Step 2 — create the deploy directory
@@ -48,7 +52,7 @@ SSH in as `deploy` and make the directory CI will rsync into. It must exist
 first; rsync will not create a missing parent.
 
 ```bash
-ssh deploy@167.233.116.149
+ssh <DEPLOY_USER>@<DEV_HOST>
 mkdir -p ~/dev-site
 ```
 
@@ -109,20 +113,16 @@ Add these:
 
 | Kind | Name | Value |
 | ---- | ---- | ----- |
-| Variable | `SSH_HOST` | `167.233.116.149` |
-| Variable | `SSH_USER` | `deploy` |
-| Variable | `REMOTE_DIR` | `/home/deploy/dev-site` |
+| Variable | `SSH_HOST` | the dev box address |
+| Variable | `SSH_USER` | the deploy user |
+| Variable | `REMOTE_DIR` | `<HOME>/dev-site` |
 | Variable | `REGISTRATION_NOTIFY_EMAIL` | `info@orcatrial.net` |
-| Secret | `SSH_KEY` | contents of `~/.ssh/gha_deploy` on the server |
+| Secret | `SSH_KEY` | the CI private key (see `orca-trial-deploy`) |
 | Secret | `REGISTRATION_WEBHOOK_URL` | where enquiries go — **see the warning below** |
 
-`SSH_KEY` is the same CI key the CRM repos use. Its public half is already in
-`/home/deploy/.ssh/authorized_keys`, so the server needs no change. To read it
-again:
-
-```bash
-cat ~/.ssh/gha_deploy      # include the -----BEGIN/-----END lines
-```
+`SSH_KEY` is the same CI key the CRM repos already use, so its public half is
+already authorised on the box and the server needs no change. The private half
+and its location are documented in `orca-trial-deploy`.
 
 Then set **Deployment branches and tags → Selected branches → `dev`**. The
 default is "All branches", which would let any branch read these secrets.
@@ -138,7 +138,7 @@ That is the whole deploy. Watch it under the repo's **Actions** tab.
 ## Step 7 — verify
 
 ```bash
-ssh deploy@167.233.116.149
+ssh <DEPLOY_USER>@<DEV_HOST>
 pm2 list                                   # orca-dev-site => online
 pm2 logs orca-dev-site --lines 40 --nostream
 curl -I http://127.0.0.1:4002              # 200 from the app itself
@@ -172,7 +172,7 @@ empty, or `REMOTE_DIR`'s basename is not `dev-site`/`uat-site`/`site`. The error
 names the offender.
 
 **Deploy fails at rsync with "Permission denied"** — `SSH_KEY` does not match
-anything in `/home/deploy/.ssh/authorized_keys`.
+anything in the deploy user's `authorized_keys`.
 
 **pm2 throws "cannot identify the environment"** — `REMOTE_DIR` points somewhere
 whose basename is not in `TARGETS` in `ecosystem.config.js`.

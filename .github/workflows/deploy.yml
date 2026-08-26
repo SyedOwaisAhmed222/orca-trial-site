@@ -40,7 +40,7 @@ jobs:
           # that path points at. Refuse a home directory or /.
           case "$REMOTE_DIR" in
             /*/*/*) ;;
-            *) echo "::error::REMOTE_DIR must be an absolute path like /home/deploy/dev-site (got '$REMOTE_DIR')."
+            *) echo "::error::REMOTE_DIR must be an absolute path ending in dev-site/uat-site/site (got '$REMOTE_DIR')."
                fail=1 ;;
           esac
           # ecosystem.config.js derives the pm2 app name and port from this
