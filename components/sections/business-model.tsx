@@ -3,11 +3,21 @@ import { Reveal } from '../ui/reveal'
 import { SectionGlow } from '../ui/atmosphere'
 import { SectionHeading } from '../ui/section-heading'
 import { SpotlightCard } from '../ui/spotlight-card'
+import { PullQuote } from '../ui/pull-quote'
+import { MoneyFlow } from '../ui/money-flow'
+import { ContractMerge } from '../ui/contract-merge'
 
+/**
+ * Orca's two commitments, shown rather than described. Each card pairs a
+ * diagram with the emphasised clause of Orca's own sentence; the full sentence
+ * is one tap away inside the PullQuote.
+ */
 export function BusinessModel() {
+  const [noFee, riskFree] = businessModel
+
   return (
     <section id="model" className="relative scroll-mt-24 section-pad section-band">
-      <SectionGlow className="-top-20 right-0 h-[38rem] w-[38rem]" color="var(--color-blue-600)" />
+      <SectionGlow className="-top-20 right-0 h-[38rem] w-[38rem]" />
 
       <div className="container-page relative">
         <SectionHeading
@@ -21,26 +31,30 @@ export function BusinessModel() {
         />
 
         <div className="mt-14 grid gap-4 lg:grid-cols-2">
-          {businessModel.map((m, i) => (
-            <Reveal key={m.title} delay={i * 0.12}>
-              <SpotlightCard className="relative h-full rounded-5xl p-9 md:p-11">
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute top-6 right-8 font-display text-[7rem] leading-none font-semibold text-foam/4 select-none"
-                >
-                  0{i + 1}
-                </span>
-                <h3 className="max-w-sm font-display text-[clamp(1.6rem,2.6vw,2.1rem)] leading-[1.12] font-semibold tracking-[-0.035em] text-foam text-balance">
-                  {m.title}
-                </h3>
-                <p className="mt-6 text-[0.9375rem] leading-relaxed text-mist text-pretty">
-                  {m.body}
-                </p>
-              </SpotlightCard>
-            </Reveal>
-          ))}
+          <Reveal>
+            <SpotlightCard className="h-full rounded-5xl p-8 md:p-10">
+              <span className="section-label">{noFee.title}</span>
+              <MoneyFlow />
+              <PullQuote lead={noFee.lead} body={noFee.body} size="md" />
+            </SpotlightCard>
+          </Reveal>
+
+          <Reveal delay={0.12}>
+            <SpotlightCard className="h-full rounded-5xl p-8 md:p-10">
+              <span className="section-label">{riskFree.title}</span>
+              <MoneyFlow variant="speed" />
+              <PullQuote lead={riskFree.lead} body={riskFree.body} size="md" />
+            </SpotlightCard>
+          </Reveal>
         </div>
 
+        {/* "a single budget and contract for multiple sites under one umbrella" */}
+        <Reveal delay={0.1} amount={0.05}>
+          <div className="glass ring-glow relative mt-4 overflow-hidden rounded-5xl px-6 py-10 md:px-12">
+            <div aria-hidden className="pointer-events-none absolute inset-0 grid-veil opacity-40" />
+            <ContractMerge />
+          </div>
+        </Reveal>
       </div>
     </section>
   )

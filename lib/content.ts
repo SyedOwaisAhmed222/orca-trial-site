@@ -45,21 +45,25 @@ export const whyOrca = [
   // not headed cards — the headings that were here were written during the
   // redesign and were never Orca's words.
   {
+    lead: 'more than 360 sites and 1,600+ PIs',
     body: 'Orca has a network of more than 360 sites and 1,600+ PIs diversely located across USA.',
     icon: 'network',
     span: 'lg:col-span-3',
   },
   {
+    lead: 'without any long term and exclusive agreements',
     body: 'Orca offers a range of startup services including budgeting, contracting, receivable management and patient recruitment assistance, without any long term and exclusive agreements.',
     icon: 'layers',
     span: 'lg:col-span-3',
   },
   {
+    lead: 'only compensated if the site successfully enrolls patients',
     body: 'Orca Trial is only compensated if the site successfully enrolls patients.',
     icon: 'shield',
     span: 'lg:col-span-2',
   },
   {
+    lead: 'find relevant investigators / sites to meet their project time lines',
     body: 'Our team is working to develop strategy for identification and study startup which help sponsors and CROs to find relevant investigators / sites to meet their project time lines.',
     icon: 'compass',
     span: 'lg:col-span-4',
@@ -90,10 +94,12 @@ export const audiences = [
 export const businessModel = [
   {
     title: 'No hidden fee',
+    lead: 'we do not charge any hidden fees along the process',
     body: 'At Orca, we do not charge any hidden fees along the process — not from our network, our sites, or sponsors and CROs. After negotiating a budget, our philosophy is to cover all costs incurred during the study. Orca believes in negotiating a single budget with our sponsors as well as our sites.',
   },
   {
     title: 'Risk-free business development for site',
+    lead: 'disburses them as soon as we receive them',
     body: 'Orca receives payments from sponsors on behalf of the site and disburses them as soon as we receive them. There is no hidden fee in between. This allows research sites hassle-free business development while we handle all feedback on their behalf.',
   },
 ] as const
@@ -102,21 +108,25 @@ export const sponsorPillars = [
   {
     n: '01',
     title: 'Customized study support',
+    lead: 'we match each sponsor with the most relevant sites',
     body: 'With our wide range of research sites and understanding of core study areas, we match each sponsor with the most relevant sites — those with a proven core competency in that study area.',
   },
   {
     n: '02',
     title: 'Cost effectiveness',
+    lead: 'a single budget and contract for multiple sites under one umbrella',
     body: 'Orca negotiates a single budget and contract for multiple sites under one umbrella. That means expedited study startup and real cost savings for the study.',
   },
   {
     n: '03',
     title: 'Unified study administration',
+    lead: 'One point of contact for budget, contract and communication',
     body: 'One point of contact for budget, contract and communication across a single study. A central point for the research network saves clients time and resources by streamlining information — with unique site identification and feasibility reports at an accelerated pace.',
   },
   {
     n: '04',
     title: 'Accelerated study start-up',
+    lead: 'Contract and budget responses in two working days',
     body: 'A single contract with the sponsor for all Orca sites in a study. Contract and budget responses in two working days. Full transparency, start to finish.',
   },
 ] as const
@@ -124,11 +134,13 @@ export const sponsorPillars = [
 export const networkPillars = [
   {
     title: 'Geographically dispersed research',
+    lead: 'ensures patient diversity and increases test scenarios',
     body: 'Orca can carry a program across geographically dispersed areas of the United States, which ensures patient diversity and increases test scenarios.',
     icon: 'globe',
   },
   {
     title: 'Certified sites',
+    lead: 'fully trained and certified',
     body: 'All investigators and site personnel are fully trained and certified, and maintain uniform SOPs within their respective research topics.',
     icon: 'badge',
   },
@@ -155,3 +167,27 @@ export const therapeuticAreas = [
 // not published a step-by-step workflow, so the site must not assert one.
 
 export type TherapeuticArea = (typeof therapeuticAreas)[number]
+
+
+/**
+ * Guard rail. Every `lead` must be a verbatim substring of its `body` — the
+ * lead is emphasis pulled out of Orca's sentence, never a rewrite of it. If
+ * someone edits a body and forgets the lead, this throws in development.
+ */
+function assertLeadsAreVerbatim() {
+  const groups: ReadonlyArray<ReadonlyArray<{ lead?: string; body: string }>> = [
+    whyOrca,
+    businessModel,
+    sponsorPillars,
+    networkPillars,
+  ]
+  for (const group of groups) {
+    for (const item of group) {
+      if (item.lead && !item.body.includes(item.lead)) {
+        throw new Error('lead is not verbatim in body: "' + item.lead + '"')
+      }
+    }
+  }
+}
+
+if (process.env.NODE_ENV !== 'production') assertLeadsAreVerbatim()

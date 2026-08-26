@@ -2,6 +2,7 @@
 
 import { audiences, whyOrca } from '@/lib/content'
 import { openEnquiry } from '@/lib/audience-store'
+import { PullQuote } from '../ui/pull-quote'
 import { Icon } from '../ui/icons'
 import { Reveal, RevealGroup, RevealItem } from '../ui/reveal'
 import { SectionGlow } from '../ui/atmosphere'
@@ -31,9 +32,7 @@ export function WhyOrca() {
                   <span className="grid h-11 w-11 place-items-center rounded-2xl border border-blue-400/22 bg-blue-400/8 text-blue-300 transition-colors duration-500 group-hover/spot:bg-blue-400/14">
                     <Glyph className="h-5 w-5" />
                   </span>
-                  <p className="mt-5 text-[1rem] leading-relaxed text-mist text-pretty">
-                    {item.body}
-                  </p>
+                  <PullQuote className="mt-5" lead={item.lead} body={item.body} />
                 </SpotlightCard>
               </RevealItem>
             )

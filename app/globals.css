@@ -295,6 +295,24 @@ body {
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
+/* Scroll-linked motion values are not covered by <MotionConfig reducedMotion>:
+   they are bound to scroll position, not to an animation. Without this, a
+   visitor who reduces motion never reaches the end of a scroll-driven sequence
+   and simply never sees the payoff. `!important` is deliberate — it has to beat
+   the inline style Motion writes.
+
+     data-scroll-fx="reveal"  content that must end up visible
+     data-scroll-fx="decor"   purely decorative, safe to drop */
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-fx='reveal'] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-scroll-fx='decor'] {
+    display: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

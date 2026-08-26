@@ -6,7 +6,7 @@ import { site, stats } from '@/lib/content'
 import { ButtonLink } from '../ui/button'
 import { Counter } from '../ui/counter'
 import { Icon } from '../ui/icons'
-import { NetworkMap } from '../ui/network-map'
+import { NetworkCanvas } from '../ui/network-canvas'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26, filter: 'blur(8px)' },
@@ -34,12 +34,9 @@ export function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative isolate overflow-hidden pt-[var(--nav-h)]">
-      {/* The network itself, faint, behind the fold */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-[16%] -right-[18%] hidden w-[80%] opacity-[0.16] [mask-image:radial-gradient(ellipse_at_60%_50%,#000_25%,transparent_72%)] lg:block"
-      >
-        <NetworkMap decorative />
+      {/* The network, live and touchable, occupying the right of the fold */}
+      <div className="absolute top-[12%] -right-[8%] hidden w-[58%] opacity-80 [mask-image:radial-gradient(ellipse_at_60%_50%,#000_46%,transparent_82%)] lg:block xl:w-[62%]">
+        <NetworkCanvas />
       </div>
 
       <div className="container-page relative">
@@ -51,7 +48,7 @@ export function Hero() {
             variants={{ show: { transition: { staggerChildren: 0.11, delayChildren: 0.1 } } }}
             initial="hidden"
             animate="show"
-            className="max-w-4xl"
+            className="max-w-4xl lg:max-w-2xl"
           >
             <motion.div variants={fadeUp} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
               <span className="glass inline-flex items-center gap-2.5 rounded-full py-2 pr-5 pl-2.5 text-[0.75rem] font-medium tracking-tight text-mist">

@@ -5,6 +5,7 @@ import { Reveal } from '../ui/reveal'
 import { SectionGlow } from '../ui/atmosphere'
 import { SectionHeading } from '../ui/section-heading'
 import { SpotlightCard } from '../ui/spotlight-card'
+import { PullQuote } from '../ui/pull-quote'
 
 export function SiteNetwork() {
   return (
@@ -56,12 +57,10 @@ export function SiteNetwork() {
                   <span className="grid h-11 w-11 place-items-center rounded-2xl border border-blue-400/22 bg-blue-400/8 text-blue-300">
                     <Glyph className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-5 font-display text-lg font-semibold tracking-[-0.02em] text-foam">
+                  <p className="mt-5 text-[0.6875rem] font-semibold tracking-[0.16em] text-fog uppercase">
                     {p.title}
-                  </h3>
-                  <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-mist text-pretty">
-                    {p.body}
                   </p>
+                  <PullQuote className="mt-3" lead={p.lead} body={p.body} size="sm" />
                 </SpotlightCard>
               </Reveal>
             )
