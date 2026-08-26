@@ -204,7 +204,7 @@ export function Register() {
             <div className="glass ring-glow relative overflow-hidden rounded-5xl p-7 md:p-10">
               {/* Audience switch — the single most important control on the page */}
               <div
-                role="tablist"
+                role="group"
                 aria-label="Who are you?"
                 className="relative grid grid-cols-2 gap-1 rounded-full border border-foam/9 bg-abyss/50 p-1"
               >
@@ -214,8 +214,7 @@ export function Register() {
                     <button
                       key={a}
                       type="button"
-                      role="tab"
-                      aria-selected={isActive}
+                      aria-pressed={isActive}
                       data-cta={'audience-' + a}
                       onClick={() => switchTo(a)}
                       className={

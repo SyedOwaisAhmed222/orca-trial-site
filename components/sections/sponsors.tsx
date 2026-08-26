@@ -49,7 +49,7 @@ export function Sponsors() {
                       onClick={() => setOpenIndex(i)}
                       aria-expanded={isActive}
                       className={
-                        'group relative flex w-full items-center gap-5 rounded-3xl border px-6 py-5 text-left transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ' +
+                        'group relative flex w-full items-center gap-4 rounded-3xl border px-5 py-5 text-left transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:gap-5 sm:px-6 ' +
                         (isActive
                           ? 'border-aqua-400/28 bg-foam/6'
                           : 'border-foam/7 bg-transparent hover:border-foam/14 hover:bg-foam/3')
@@ -65,7 +65,7 @@ export function Sponsors() {
                       </span>
                       <span
                         className={
-                          'font-display text-[1.0625rem] font-medium tracking-[-0.015em] transition-colors duration-500 ' +
+                          'font-display text-[1.0625rem] font-medium tracking-[-0.015em] text-pretty transition-colors duration-500 ' +
                           (isActive ? 'text-foam' : 'text-mist group-hover:text-foam')
                         }
                       >

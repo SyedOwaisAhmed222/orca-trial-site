@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Sora } from 'next/font/google'
 import { site } from '@/lib/content'
 import { Atmosphere } from '@/components/ui/atmosphere'
+import { LogoGradientDefs } from '@/components/ui/logo'
 import './globals.css'
 
 const sora = Sora({
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <LogoGradientDefs />
         <Atmosphere />
         {children}
         <script
