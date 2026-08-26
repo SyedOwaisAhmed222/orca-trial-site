@@ -6,26 +6,32 @@
    ramp that carries every emphasis, glow and gradient on the site.
    ──────────────────────────────────────────────────────────────── */
 @theme {
-  --color-abyss: #03080f;
-  --color-hull: #061320;
-  --color-deep: #0a1c2e;
-  --color-shelf: #10293f;
+  /* ────────────────────────────────────────────────────────────
+     Brand colours sampled from the official logotype
+     (wp-content/uploads/2022/11/logo.png):
+       #4472C4  brand blue
+       #595959  brand grey
+     The ramp below is built around those two. Do not substitute.
+     ──────────────────────────────────────────────────────────── */
+  --color-brand: #4472c4;
+  --color-brand-grey: #595959;
 
-  --color-foam: #eaf4fb;
-  --color-mist: #9fb6c9;
-  --color-fog: #6d8399;
+  --color-abyss: #070a10;
+  --color-hull: #0e131c;
+  --color-deep: #141b28;
+  --color-shelf: #1d2635;
 
-  --color-aqua-50: #ecfeff;
-  --color-aqua-200: #a5f3fc;
-  --color-aqua-300: #67e8f9;
-  --color-aqua-400: #22d3ee;
-  --color-aqua-500: #06b6d4;
-  --color-aqua-600: #0891b2;
-  --color-aqua-700: #0e7490;
+  --color-foam: #eef2f8;
+  --color-mist: #a8b2c2;
+  --color-fog: #78828f;
 
-  --color-tide-400: #38bdf8;
-  --color-tide-500: #0ea5e9;
-  --color-kelp-400: #2dd4bf;
+  --color-blue-100: #dfe8f8;
+  --color-blue-200: #bccdf0;
+  --color-blue-300: #93aee4;
+  --color-blue-400: #6d92d7;
+  --color-blue-500: #4472c4;
+  --color-blue-600: #3a61a8;
+  --color-blue-700: #2f4f8a;
 
   --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -131,12 +137,12 @@ body {
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--color-aqua-400) 35%, transparent);
-  color: var(--color-aqua-50);
+  background: color-mix(in oklab, var(--color-blue-400) 35%, transparent);
+  color: var(--color-blue-100);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-aqua-400);
+  outline: 2px solid var(--color-blue-400);
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -150,12 +156,12 @@ body {
   background: var(--color-abyss);
 }
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in oklab, var(--color-aqua-500) 40%, var(--color-deep));
+  background: color-mix(in oklab, var(--color-blue-1000) 40%, var(--color-deep));
   border-radius: 999px;
   border: 2px solid var(--color-abyss);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-aqua-500);
+  background: var(--color-blue-1000);
 }
 
 /* ── Utilities ────────────────────────────────────────────────── */
@@ -188,9 +194,9 @@ body {
   background-image: linear-gradient(
     100deg,
     var(--color-foam) 0%,
-    var(--color-aqua-200) 42%,
-    var(--color-aqua-400) 70%,
-    var(--color-tide-400) 100%
+    var(--color-blue-200) 42%,
+    var(--color-blue-400) 70%,
+    var(--color-blue-300) 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -208,10 +214,10 @@ body {
     padding: 1px;
     background: linear-gradient(
       135deg,
-      color-mix(in oklab, var(--color-aqua-400) 55%, transparent),
+      color-mix(in oklab, var(--color-blue-400) 55%, transparent),
       transparent 40%,
       transparent 60%,
-      color-mix(in oklab, var(--color-tide-400) 40%, transparent)
+      color-mix(in oklab, var(--color-blue-300) 40%, transparent)
     );
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
@@ -280,7 +286,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-aqua-300);
+  color: var(--color-blue-300);
 }
 
 /* Edge-fade for marquees and long scroll rows */

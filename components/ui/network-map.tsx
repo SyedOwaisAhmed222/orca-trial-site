@@ -63,12 +63,12 @@ export function NetworkMap({
       >
         <defs>
           <radialGradient id={glow}>
-            <stop offset="0%" stopColor="var(--color-aqua-300)" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="var(--color-aqua-500)" stopOpacity="0" />
+            <stop offset="0%" stopColor="var(--color-blue-300)" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="var(--color-blue-1000)" stopOpacity="0" />
           </radialGradient>
           <linearGradient id={link} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--color-aqua-400)" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="var(--color-tide-500)" stopOpacity="0.15" />
+            <stop offset="0%" stopColor="var(--color-blue-400)" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="var(--color-blue-600)" stopOpacity="0.15" />
           </linearGradient>
         </defs>
 
@@ -105,7 +105,7 @@ export function NetworkMap({
                 cx={x}
                 cy={y}
                 r={w === 2 ? 0.85 : 0.5}
-                fill={w === 2 ? 'var(--color-aqua-200)' : 'var(--color-aqua-400)'}
+                fill={w === 2 ? 'var(--color-blue-200)' : 'var(--color-blue-400)'}
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}

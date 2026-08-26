@@ -24,13 +24,13 @@ type Status = 'idle' | 'sending' | 'sent' | 'error'
 
 const pitch: Record<Audience, { eyebrow: string; title: React.ReactNode; body: string; points: string[] }> = {
   site: {
-    eyebrow: 'For research sites',
+    eyebrow: 'Get in touch',
     title: (
       <>
-        Put your site on the <span className="text-gradient">Orca network</span>.
+        Register your <span className="text-gradient">site</span>
       </>
     ),
-    body: 'Study availability through the year, no additional fee from the site, and hassle-free business development. Five fields is all we need to start.',
+    body: 'Study availability through the year, no additional fee from the site, and hassle-free business development.',
     points: [
       'No long-term or exclusive agreements',
       'Compensation only on successful enrollment',
@@ -38,13 +38,13 @@ const pitch: Record<Audience, { eyebrow: string; title: React.ReactNode; body: s
     ],
   },
   sponsor: {
-    eyebrow: 'For sponsors & CROs',
+    eyebrow: 'Get in touch',
     title: (
       <>
-        Reach 360+ sites through <span className="text-gradient">one contract</span>.
+        Sponsor / <span className="text-gradient">CRO enquiry</span>
       </>
     ),
-    body: 'Tell us about the study and we will come back with relevant sites, a single budget and a feasibility view — contract and budget responses in two working days.',
+    body: 'Tell us about the study and we will come back with relevant sites, a single budget and a feasibility view.',
     points: [
       'One negotiation covering every Orca site',
       'Site identification and feasibility, accelerated',
@@ -137,7 +137,7 @@ export function Register() {
             <div className="lg:sticky lg:top-28">
               {/* Matches the numbered rule the other sections open with. */}
               <div className="flex items-center gap-4">
-                <span className="font-display text-[0.6875rem] font-semibold tracking-[0.14em] text-aqua-400 tabular-nums">
+                <span className="font-display text-[0.6875rem] font-semibold tracking-[0.14em] text-blue-400 tabular-nums">
                   06
                 </span>
                 <span className="section-label">{copy.eyebrow}</span>
@@ -165,7 +165,7 @@ export function Register() {
                   <ul className="mt-9 grid gap-3.5">
                     {copy.points.map((p) => (
                       <li key={p} className="flex items-start gap-3 text-[0.9375rem] text-mist">
-                        <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-aqua-400/12 text-aqua-300">
+                        <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-400/12 text-blue-300">
                           <Icon.check className="h-3 w-3" strokeWidth={2.4} />
                         </span>
                         {p}
@@ -176,28 +176,24 @@ export function Register() {
               </AnimatePresence>
 
               <div className="mt-10 grid gap-3 border-t border-foam/8 pt-8 text-sm">
-                <p className="flex items-center gap-2.5 text-mist">
-                  <Icon.clock className="h-4 w-4 shrink-0 text-aqua-400" />
-                  We reply within two working days.
-                </p>
                 <p className="flex items-center gap-2.5 text-fog">
-                  <Icon.mail className="h-4 w-4 shrink-0 text-aqua-400" />
+                  <Icon.mail className="h-4 w-4 shrink-0 text-blue-400" />
                   Prefer email?{' '}
                   <a
                     href={'mailto:' + site.email}
                     data-cta="form-email"
-                    className="rounded px-0.5 py-1 text-aqua-300 underline-offset-4 hover:underline"
+                    className="rounded px-0.5 py-1 text-blue-300 underline-offset-4 hover:underline"
                   >
                     {site.email}
                   </a>
                 </p>
                 <p className="flex items-center gap-2.5 text-fog">
-                  <Icon.phone className="h-4 w-4 shrink-0 text-aqua-400" />
+                  <Icon.phone className="h-4 w-4 shrink-0 text-blue-400" />
                   Or call{' '}
                   <a
                     href={'tel:' + site.phoneHref}
                     data-cta="form-phone"
-                    className="rounded px-0.5 py-1 text-aqua-300 underline-offset-4 hover:underline"
+                    className="rounded px-0.5 py-1 text-blue-300 underline-offset-4 hover:underline"
                   >
                     {site.phone}
                   </a>
@@ -233,7 +229,7 @@ export function Register() {
                         <motion.span
                           layoutId="audience-pill"
                           aria-hidden
-                          className="absolute inset-0 rounded-full bg-linear-to-r from-aqua-400 to-tide-400 shadow-[0_6px_20px_-6px_var(--color-aqua-500)]"
+                          className="absolute inset-0 rounded-full bg-linear-to-r from-blue-400 to-blue-300 shadow-[0_6px_20px_-6px_var(--color-blue-1000)]"
                           transition={{ type: 'spring', stiffness: 400, damping: 34 }}
                         />
                       )}
@@ -258,18 +254,17 @@ export function Register() {
                     className="flex min-h-[24rem] flex-col items-center justify-center text-center"
                     role="status"
                   >
-                    <span className="grid h-16 w-16 place-items-center rounded-full border border-aqua-400/30 bg-aqua-400/10 text-aqua-300">
+                    <span className="grid h-16 w-16 place-items-center rounded-full border border-blue-400/30 bg-blue-400/10 text-blue-300">
                       <Icon.check className="h-7 w-7" strokeWidth={2} />
                     </span>
                     <h3 className="mt-7 font-display text-2xl font-semibold tracking-[-0.02em] text-foam">
                       Thank you — we have it
                     </h3>
                     <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-mist">
-                      A member of the Orca team will be in touch within two working days. If it is
-                      urgent, call{' '}
+                      A member of the Orca team will be in touch. If it is urgent, call{' '}
                       <a
                         href={'tel:' + site.phoneHref}
-                        className="rounded px-0.5 py-1 text-aqua-300 underline-offset-4 hover:underline"
+                        className="rounded px-0.5 py-1 text-blue-300 underline-offset-4 hover:underline"
                       >
                         {site.phone}
                       </a>
@@ -361,7 +356,7 @@ export function Register() {
                             type="button"
                             onClick={() => setShowOptional((v) => !v)}
                             aria-expanded={showOptional}
-                            className="-mx-2 flex min-h-11 items-center gap-2 rounded-lg px-2 text-[0.8125rem] font-medium text-aqua-300 transition-colors hover:text-aqua-200 sm:min-h-9"
+                            className="-mx-2 flex min-h-11 items-center gap-2 rounded-lg px-2 text-[0.8125rem] font-medium text-blue-300 transition-colors hover:text-blue-200 sm:min-h-9"
                           >
                             <Icon.arrowDown
                               className={

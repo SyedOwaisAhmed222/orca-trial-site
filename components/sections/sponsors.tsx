@@ -27,13 +27,8 @@ export function Sponsors() {
         <SectionHeading
           index="03"
           label="One step solution"
-          title={
-            <>
-              End-to-end solution for{' '}
-              <span className="text-gradient">sponsors &amp; CROs</span>
-            </>
-          }
-          body="Orca brings you the end-to-end solution in clinical research — a single point of contact for identification, budget, contract and startup."
+          title={<span className="text-gradient">Sponsor / CROs</span>}
+          body="Orca brings you the end to end solution in clinical research!"
         />
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
@@ -51,14 +46,14 @@ export function Sponsors() {
                       className={
                         'group relative flex w-full items-center gap-4 rounded-3xl border px-5 py-5 text-left transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:gap-5 sm:px-6 ' +
                         (isActive
-                          ? 'border-aqua-400/28 bg-foam/6'
+                          ? 'border-blue-400/28 bg-foam/6'
                           : 'border-foam/7 bg-transparent hover:border-foam/14 hover:bg-foam/3')
                       }
                     >
                       <span
                         className={
                           'font-display text-sm font-semibold tabular-nums transition-colors duration-500 ' +
-                          (isActive ? 'text-aqua-300' : 'text-fog')
+                          (isActive ? 'text-blue-300' : 'text-fog')
                         }
                       >
                         {p.n}
@@ -75,14 +70,14 @@ export function Sponsors() {
                         className={
                           'ml-auto h-4 w-4 shrink-0 transition-all duration-500 ' +
                           (isActive
-                            ? 'translate-x-0 text-aqua-300 opacity-100'
+                            ? 'translate-x-0 text-blue-300 opacity-100'
                             : '-translate-x-2 text-fog opacity-0 group-hover:translate-x-0 group-hover:opacity-60')
                         }
                       />
                       {isActive && (
                         <motion.span
                           layoutId="sponsor-bar"
-                          className="absolute top-4 bottom-4 -left-px w-0.5 rounded-full bg-linear-to-b from-aqua-300 to-tide-500"
+                          className="absolute top-4 bottom-4 -left-px w-0.5 rounded-full bg-linear-to-b from-blue-300 to-blue-600"
                           transition={{ type: 'spring', stiffness: 360, damping: 34 }}
                         />
                       )}
@@ -117,9 +112,6 @@ export function Sponsors() {
                 Request site feasibility
                 <Icon.arrowRight className="h-4 w-4" />
               </Button>
-              <p className="mt-3 text-center text-[0.75rem] text-fog">
-                Contract and budget responses in two working days.
-              </p>
             </div>
           </Reveal>
 
@@ -128,7 +120,7 @@ export function Sponsors() {
             <div className="glass ring-glow flex h-full flex-col overflow-hidden rounded-5xl p-10">
               <div
                 aria-hidden
-                className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[radial-gradient(circle,var(--color-aqua-500)_0%,transparent_66%)] opacity-22 blur-3xl"
+                className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[radial-gradient(circle,var(--color-blue-1000)_0%,transparent_66%)] opacity-22 blur-3xl"
               />
               <AnimatePresence mode="wait">
                 <motion.div
@@ -159,9 +151,6 @@ export function Sponsors() {
                   Request site feasibility
                   <Icon.arrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
-                <p className="mt-3 text-[0.75rem] text-fog">
-                  Contract and budget responses in two working days.
-                </p>
               </div>
             </div>
           </Reveal>

@@ -26,7 +26,7 @@ export function SectionHeading({
     <div className={className}>
       <Reveal>
         <div className="flex items-center gap-4">
-          <span className="font-display text-[0.6875rem] font-semibold tracking-[0.14em] text-aqua-400 tabular-nums">
+          <span className="font-display text-[0.6875rem] font-semibold tracking-[0.14em] text-blue-400 tabular-nums">
             {index}
           </span>
           <span className="section-label">{label}</span>

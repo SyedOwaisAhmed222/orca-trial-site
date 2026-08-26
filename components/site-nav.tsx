@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react'
 import { nav, site } from '@/lib/content'
 import { openEnquiry } from '@/lib/audience-store'
 import { Icon } from './ui/icons'
-import { Logo, Wordmark } from './ui/logo'
+import { Logo } from './ui/logo'
 import { ButtonLink } from './ui/button'
 
 export function SiteNav() {
@@ -87,7 +87,6 @@ export function SiteNav() {
         <div className="container-page flex h-[var(--nav-h)] items-center justify-between gap-6">
           <a href="#top" className="flex items-center gap-2.5" aria-label="Orca Trial — home">
             <Logo />
-            <Wordmark />
           </a>
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -107,7 +106,7 @@ export function SiteNav() {
                     <motion.span
                       layoutId="nav-pill"
                       aria-hidden
-                      className="absolute inset-0 rounded-full border border-aqua-400/25 bg-foam/6"
+                      className="absolute inset-0 rounded-full border border-blue-400/25 bg-foam/6"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -125,7 +124,7 @@ export function SiteNav() {
               data-cta="nav-phone"
               className="hidden items-center gap-2 rounded-full px-3 py-2 text-[0.8125rem] font-medium text-mist transition-colors hover:text-foam xl:flex"
             >
-              <Icon.phone className="h-4 w-4 text-aqua-400" />
+              <Icon.phone className="h-4 w-4 text-blue-400" />
               {site.phone}
             </a>
 
@@ -161,7 +160,7 @@ export function SiteNav() {
         {/* Reading progress */}
         <motion.div
           style={{ scaleX: progress }}
-          className="h-px origin-left bg-linear-to-r from-aqua-400 via-tide-400 to-kelp-400"
+          className="h-px origin-left bg-linear-to-r from-blue-400 via-blue-300 to-blue-400"
         />
       </header>
 
@@ -188,7 +187,6 @@ export function SiteNav() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <Logo className="h-8 w-8" />
-                  <Wordmark />
                 </div>
                 <button
                   type="button"
@@ -212,7 +210,7 @@ export function SiteNav() {
                     className="flex items-center justify-between rounded-2xl px-4 py-3.5 font-display text-lg font-medium text-foam transition-colors hover:bg-foam/6"
                   >
                     {item.label}
-                    <Icon.arrowRight className="h-4 w-4 text-aqua-400" />
+                    <Icon.arrowRight className="h-4 w-4 text-blue-400" />
                   </motion.a>
                 ))}
               </nav>
@@ -244,10 +242,10 @@ export function SiteNav() {
 
               <div className="mt-6 grid gap-2 border-t border-foam/8 pt-5 text-sm text-mist">
                 <a href={'mailto:' + site.email} className="flex items-center gap-2.5 hover:text-foam">
-                  <Icon.mail className="h-4 w-4 text-aqua-400" /> {site.email}
+                  <Icon.mail className="h-4 w-4 text-blue-400" /> {site.email}
                 </a>
                 <a href={'tel:' + site.phoneHref} className="flex items-center gap-2.5 hover:text-foam">
-                  <Icon.phone className="h-4 w-4 text-aqua-400" /> {site.phone}
+                  <Icon.phone className="h-4 w-4 text-blue-400" /> {site.phone}
                 </a>
               </div>
             </motion.div>

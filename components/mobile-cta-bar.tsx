@@ -53,7 +53,7 @@ export function MobileCtaBar() {
               href={'tel:' + site.phoneHref}
               data-cta="mobilebar-call"
               aria-label={'Call ' + site.phone}
-              className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-foam/10 text-aqua-300 transition-colors active:bg-foam/10"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-foam/10 text-blue-300 transition-colors active:bg-foam/10"
             >
               <Icon.phone className="h-4.5 w-4.5" />
             </a>
@@ -61,7 +61,7 @@ export function MobileCtaBar() {
               type="button"
               data-cta="mobilebar-enquiry"
               onClick={() => openEnquiry('site')}
-              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-linear-to-r from-aqua-400 to-tide-400 text-[0.875rem] font-semibold text-abyss active:brightness-110"
+              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-linear-to-r from-blue-400 to-blue-300 text-[0.875rem] font-semibold text-abyss active:brightness-110"
             >
               Register your site
               <Icon.arrowRight className="h-4 w-4" />

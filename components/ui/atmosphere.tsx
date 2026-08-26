@@ -8,9 +8,9 @@ export function Atmosphere() {
       <div className="absolute inset-0 bg-abyss" />
 
       {/* Auroras */}
-      <div className="absolute -top-[28rem] left-1/2 h-[52rem] w-[52rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,var(--color-aqua-500)_0%,transparent_62%)] opacity-30 blur-[110px] animate-drift" />
-      <div className="absolute top-1/3 -right-72 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle,var(--color-tide-500)_0%,transparent_65%)] opacity-22 blur-[120px] animate-drift-slow" />
-      <div className="absolute bottom-0 -left-64 h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,var(--color-kelp-400)_0%,transparent_66%)] opacity-14 blur-[130px] animate-drift" />
+      <div className="absolute -top-[28rem] left-1/2 h-[52rem] w-[52rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,var(--color-blue-1000)_0%,transparent_62%)] opacity-30 blur-[110px] animate-drift" />
+      <div className="absolute top-1/3 -right-72 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle,var(--color-blue-600)_0%,transparent_65%)] opacity-22 blur-[120px] animate-drift-slow" />
+      <div className="absolute bottom-0 -left-64 h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,var(--color-blue-400)_0%,transparent_66%)] opacity-14 blur-[130px] animate-drift" />
 
       {/* Blueprint grid */}
       <div className="absolute inset-0 grid-veil opacity-60" />
@@ -27,7 +27,7 @@ export function Atmosphere() {
 /** A soft radial wash placed behind an individual section. */
 export function SectionGlow({
   className = '',
-  color = 'var(--color-aqua-500)',
+  color = 'var(--color-blue-1000)',
 }: {
   className?: string
   color?: string

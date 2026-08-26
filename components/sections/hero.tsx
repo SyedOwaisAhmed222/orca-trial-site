@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
-import { stats } from '@/lib/content'
+import { site, stats } from '@/lib/content'
 import { ButtonLink } from '../ui/button'
 import { Counter } from '../ui/counter'
 import { Icon } from '../ui/icons'
@@ -56,10 +56,10 @@ export function Hero() {
             <motion.div variants={fadeUp} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
               <span className="glass inline-flex items-center gap-2.5 rounded-full py-2 pr-5 pl-2.5 text-[0.75rem] font-medium tracking-tight text-mist">
                 <span className="relative grid h-6 w-6 place-items-center">
-                  <span className="absolute h-2 w-2 rounded-full bg-aqua-400 animate-sonar" />
-                  <span className="h-2 w-2 rounded-full bg-aqua-400" />
+                  <span className="absolute h-2 w-2 rounded-full bg-blue-400 animate-sonar" />
+                  <span className="h-2 w-2 rounded-full bg-blue-400" />
                 </span>
-                Clinical research network · United States
+                {site.tagline}
               </span>
             </motion.div>
 
@@ -68,9 +68,9 @@ export function Hero() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="mt-8 font-display text-[clamp(2.4rem,7.4vw,5.75rem)] leading-[1.02] font-semibold tracking-[-0.045em] text-balance md:leading-[0.98]"
             >
-              Clinical research,
+              Welcome to
               <br />
-              <span className="text-gradient">aligned end to end.</span>
+              <span className="text-gradient">Orca Trial</span>
             </motion.h1>
 
             <motion.p
@@ -78,9 +78,7 @@ export function Hero() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="mt-8 max-w-2xl text-[1.0625rem] leading-relaxed text-mist text-pretty md:text-lg"
             >
-              Orca provides study startup, financial services support and lead generation —
-              matching medical trials to the capabilities of an independent network of sites.
-              One budget. One contract. No hidden fees.
+              {site.intro}
             </motion.p>
 
             <motion.div
@@ -123,7 +121,7 @@ export function Hero() {
                   <Counter value={s.value} suffix={s.suffix} />
                 </dd>
                 <p className="mt-2 text-[0.8125rem] text-fog">{s.sub}</p>
-                <span className="absolute inset-x-6 bottom-0 h-px scale-x-0 bg-linear-to-r from-aqua-400 to-transparent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+                <span className="absolute inset-x-6 bottom-0 h-px scale-x-0 bg-linear-to-r from-blue-400 to-transparent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
               </motion.div>
             ))}
           </motion.dl>
@@ -137,7 +135,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.8 }}
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-fog transition-colors hover:text-aqua-300 lg:flex"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-fog transition-colors hover:text-blue-300 lg:flex"
       >
         <span className="text-[0.625rem] font-medium tracking-[0.24em] uppercase">Scroll</span>
         <motion.span

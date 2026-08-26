@@ -33,11 +33,11 @@ export function SiteNetwork() {
 
             <div className="relative mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 border-t border-foam/8 pt-6 text-[0.8125rem] text-fog">
               <span className="flex items-center gap-2.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-aqua-200 shadow-[0_0_10px_var(--color-aqua-300)]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-200 shadow-[0_0_10px_var(--color-blue-300)]" />
                 Regional hub
               </span>
               <span className="flex items-center gap-2.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-aqua-400" />
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
                 Research site
               </span>
               <span className="text-mist">
@@ -53,7 +53,7 @@ export function SiteNetwork() {
             return (
               <Reveal key={p.title} delay={i * 0.1}>
                 <SpotlightCard className="h-full rounded-4xl p-8 md:p-10">
-                  <span className="grid h-11 w-11 place-items-center rounded-2xl border border-aqua-400/22 bg-aqua-400/8 text-aqua-300">
+                  <span className="grid h-11 w-11 place-items-center rounded-2xl border border-blue-400/22 bg-blue-400/8 text-blue-300">
                     <Glyph className="h-5 w-5" />
                   </span>
                   <h3 className="mt-5 font-display text-lg font-semibold tracking-[-0.02em] text-foam">

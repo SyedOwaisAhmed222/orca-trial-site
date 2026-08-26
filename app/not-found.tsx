@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { site } from '@/lib/content'
 import { ButtonLink } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icons'
-import { Logo, Wordmark } from '@/components/ui/logo'
+import { Logo } from '@/components/ui/logo'
 
 export const metadata: Metadata = {
   title: 'Page not found',
@@ -15,7 +15,6 @@ export default function NotFound() {
       <div className="w-full max-w-lg text-center">
         <a href="/" className="inline-flex items-center gap-2.5">
           <Logo />
-          <Wordmark />
         </a>
 
         <p className="mt-12 font-display text-[5rem] leading-none font-semibold tracking-[-0.05em] text-foam/10">
@@ -43,14 +42,14 @@ export default function NotFound() {
           Or reach us at{' '}
           <a
             href={'mailto:' + site.email}
-            className="text-aqua-300 underline-offset-4 hover:underline"
+            className="text-blue-300 underline-offset-4 hover:underline"
           >
             {site.email}
           </a>{' '}
           ·{' '}
           <a
             href={'tel:' + site.phoneHref}
-            className="text-aqua-300 underline-offset-4 hover:underline"
+            className="text-blue-300 underline-offset-4 hover:underline"
           >
             {site.phone}
           </a>

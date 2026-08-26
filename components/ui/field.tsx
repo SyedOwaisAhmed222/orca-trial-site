@@ -9,11 +9,11 @@ const control =
 
 // Applied explicitly rather than via an `aria-[invalid]` variant, so the invalid
 // state cannot lose a specificity race with the hover/focus border rules.
-const borderOk = 'border-foam/10 hover:border-foam/18 focus:border-aqua-400/55'
+const borderOk = 'border-foam/10 hover:border-foam/18 focus:border-blue-400/55'
 const borderBad = 'border-red-400/70 bg-red-400/5 hover:border-red-400/80 focus:border-red-400'
 
 const labelCls =
-  'pointer-events-none absolute top-2 left-4 text-[0.6875rem] font-medium tracking-[0.1em] text-fog uppercase transition-all duration-300 peer-placeholder-shown:top-4.5 peer-placeholder-shown:text-[0.875rem] peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:top-2 peer-focus:text-[0.6875rem] peer-focus:tracking-[0.1em] peer-focus:text-aqua-300 peer-focus:uppercase'
+  'pointer-events-none absolute top-2 left-4 text-[0.6875rem] font-medium tracking-[0.1em] text-fog uppercase transition-all duration-300 peer-placeholder-shown:top-4.5 peer-placeholder-shown:text-[0.875rem] peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:top-2 peer-focus:text-[0.6875rem] peer-focus:tracking-[0.1em] peer-focus:text-blue-300 peer-focus:uppercase'
 
 function Error({ msg, id }: { msg?: string; id?: string }) {
   if (!msg) return null
@@ -47,7 +47,7 @@ export function Field({
         />
         <label htmlFor={name} className={labelCls}>
           {label}
-          {required ? <span className="text-aqua-400"> *</span> : null}
+          {required ? <span className="text-blue-400"> *</span> : null}
         </label>
       </div>
       <Error msg={error} id={name + '-error'} />

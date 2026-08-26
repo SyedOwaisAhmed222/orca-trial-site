@@ -1,58 +1,26 @@
+import Image from 'next/image'
+
 /**
- * The fin gradient is defined once by <LogoGradientDefs /> in the root layout —
- * repeating <defs> per instance would emit duplicate element ids.
+ * The official Orca Trial logotype, used verbatim from
+ * https://orcatrial.net/wp-content/uploads/2022/11/logo.png (393 x 99).
+ * Do not redraw, recolour or re-letter this mark.
+ *
+ * It is a dark-on-light mark: the "Orca" glyph is #595959, which is close to
+ * unreadable on this site's near-black background. Until Orca supplies a
+ * reversed (light) version, it sits on a white plate so it renders exactly as
+ * designed rather than being recoloured — recolouring a logo is not our call.
  */
-export function Logo({ className = 'h-9 w-9' }: { className?: string }) {
+export function Logo({ className = 'h-8 w-auto' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 48 48" className={className} role="img" aria-label="Orca Trial">
-      <rect x="1.5" y="1.5" width="45" height="45" rx="13" fill="url(#orca-fin)" opacity="0.12" />
-      <rect
-        x="1.5"
-        y="1.5"
-        width="45"
-        height="45"
-        rx="13"
-        fill="none"
-        stroke="url(#orca-fin)"
-        strokeWidth="1.6"
+    <span className="inline-flex items-center rounded-xl bg-white px-3 py-2">
+      <Image
+        src="/logo.png"
+        alt="Orca Trial"
+        width={393}
+        height={99}
+        priority
+        className={className}
       />
-
-      {/* Dorsal fin breaking the surface */}
-      <path
-        d="M15 31.5c1.4-11 5.4-17.8 12-21.5-2.6 7-2.1 14.2 1.5 21.5Z"
-        fill="url(#orca-fin)"
-      />
-      {/* Waterline */}
-      <path
-        d="M9 35.5c2.5-2 5-2 7.5 0s5 2 7.5 0 5-2 7.5 0 5 2 7.5 0"
-        fill="none"
-        stroke="url(#orca-fin)"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-      />
-    </svg>
-  )
-}
-
-export function Wordmark() {
-  return (
-    <span className="font-display text-[1.0625rem] font-semibold tracking-[-0.02em] text-foam">
-      Orca<span className="text-aqua-400">Trial</span>
     </span>
-  )
-}
-
-/** Rendered once, near the top of <body>. */
-export function LogoGradientDefs() {
-  return (
-    <svg width="0" height="0" aria-hidden focusable="false" className="absolute">
-      <defs>
-        <linearGradient id="orca-fin" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="var(--color-aqua-300)" />
-          <stop offset="55%" stopColor="var(--color-aqua-500)" />
-          <stop offset="100%" stopColor="var(--color-tide-500)" />
-        </linearGradient>
-      </defs>
-    </svg>
   )
 }

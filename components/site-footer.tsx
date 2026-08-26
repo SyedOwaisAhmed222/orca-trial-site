@@ -1,6 +1,6 @@
 import { nav, site, therapeuticAreas } from '@/lib/content'
 import { Icon } from './ui/icons'
-import { Logo, Wordmark } from './ui/logo'
+import { Logo } from './ui/logo'
 
 export function SiteFooter() {
   const year = new Date().getFullYear()
@@ -10,13 +10,11 @@ export function SiteFooter() {
       <div className="container-page pt-16 pb-16 max-lg:pb-28">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.2fr)]">
           <div>
-            <a href="#top" className="flex items-center gap-2.5">
+            <a href="#top" className="flex items-center gap-2.5" aria-label="Orca Trial — back to top">
               <Logo />
-              <Wordmark />
             </a>
             <p className="mt-5 max-w-xs text-[0.875rem] leading-relaxed text-fog text-pretty">
-              Study startup, financial services support and lead generation for an independent
-              network of research sites across the United States.
+              {site.intro}
             </p>
           </div>
 
@@ -29,7 +27,7 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="-mx-2 flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-mist transition-colors hover:text-aqua-300 sm:min-h-9"
+                    className="-mx-2 flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-mist transition-colors hover:text-blue-300 sm:min-h-9"
                   >
                     {item.label}
                   </a>
@@ -51,7 +49,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href="#areas"
-                  className="-mx-2 mt-1 inline-flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-aqua-300 underline-offset-4 hover:underline sm:min-h-0 sm:mt-0"
+                  className="-mx-2 mt-1 inline-flex min-h-11 items-center rounded-lg px-2 text-[0.875rem] text-blue-300 underline-offset-4 hover:underline sm:min-h-0 sm:mt-0"
                 >
                   All 12 areas
                 </a>
@@ -65,16 +63,16 @@ export function SiteFooter() {
             </h3>
             <ul className="mt-5 grid gap-3.5 text-[0.875rem] text-mist">
               <li className="flex items-start gap-2.5">
-                <Icon.pin className="mt-0.5 h-4 w-4 shrink-0 text-aqua-400" />
+                <Icon.pin className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
                 <span className="leading-relaxed">{site.address}</span>
               </li>
               <li>
                 <a
                   href={'mailto:' + site.email}
                   data-cta="footer-email"
-                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-aqua-300 sm:min-h-0 sm:py-0.5"
+                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-blue-300 sm:min-h-0 sm:py-0.5"
                 >
-                  <Icon.mail className="h-4 w-4 shrink-0 text-aqua-400" />
+                  <Icon.mail className="h-4 w-4 shrink-0 text-blue-400" />
                   {site.email}
                 </a>
               </li>
@@ -82,14 +80,14 @@ export function SiteFooter() {
                 <a
                   href={'tel:' + site.phoneHref}
                   data-cta="footer-phone"
-                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-aqua-300 sm:min-h-0 sm:py-0.5"
+                  className="-mx-2 flex min-h-11 items-center gap-2.5 rounded-lg px-2 transition-colors hover:text-blue-300 sm:min-h-0 sm:py-0.5"
                 >
-                  <Icon.phone className="h-4 w-4 shrink-0 text-aqua-400" />
+                  <Icon.phone className="h-4 w-4 shrink-0 text-blue-400" />
                   {site.phone}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <Icon.clock className="h-4 w-4 shrink-0 text-aqua-400" />
+                <Icon.clock className="h-4 w-4 shrink-0 text-blue-400" />
                 {site.hours}
               </li>
             </ul>
@@ -101,7 +99,7 @@ export function SiteFooter() {
             © {year} {site.name}. All rights reserved.
           </p>
           <p className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-aqua-400 shadow-[0_0_10px_var(--color-aqua-400)]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-400 shadow-[0_0_10px_var(--color-blue-400)]" />
             Fort Lauderdale, Florida
           </p>
         </div>

@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Sora } from 'next/font/google'
 import { site } from '@/lib/content'
 import { Atmosphere } from '@/components/ui/atmosphere'
-import { LogoGradientDefs } from '@/components/ui/logo'
 import { MotionProvider } from '@/components/motion-provider'
 import './globals.css'
 
@@ -19,13 +18,13 @@ const inter = Inter({
   display: 'swap',
 })
 
-const description =
-  'Orca Trial provides study startup, financial services support and lead generation for an independent network of 360+ research sites and 1,600+ principal investigators across the United States.'
+// Orca's own description, from the live site.
+const description = site.intro
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'Orca Trial — Clinical research, aligned end to end',
+    default: 'Orca Trial',
     template: '%s · Orca Trial',
   },
   description,
@@ -42,16 +41,16 @@ export const metadata: Metadata = {
     type: 'website',
     url: site.url,
     siteName: site.name,
-    title: 'Orca Trial — Clinical research, aligned end to end',
+    title: 'Orca Trial',
     description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Orca Trial — Clinical research, aligned end to end',
+    title: 'Orca Trial',
     description,
   },
   robots: { index: true, follow: true },
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: '/icon.png' },
 }
 
 export const viewport: Viewport = {
@@ -93,11 +92,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a
           href="#top"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-full focus:bg-aqua-400 focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-abyss"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-full focus:bg-blue-400 focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-abyss"
         >
           Skip to content
         </a>
-        <LogoGradientDefs />
         <Atmosphere />
         <MotionProvider>{children}</MotionProvider>
         <script

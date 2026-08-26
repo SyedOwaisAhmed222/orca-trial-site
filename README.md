@@ -41,6 +41,32 @@ npm run dev          # http://localhost:3000
 | Enquiry form (both)  | `components/sections/register.tsx`          | `#register`  |
 | Let's connect        | `components/sections/contact.tsx`           | `#contact`   |
 
+## Brand assets — do not substitute
+
+The logo, favicon and the twelve therapeutic-area illustrations are Orca's own
+files, taken verbatim from the live WordPress site:
+
+| Asset | Source |
+| ----- | ------ |
+| `public/logo.png` | `wp-content/uploads/2022/11/logo.png` |
+| `public/icon.png` | `wp-content/uploads/2022/10/icon.png` |
+| `public/areas/*.png` | `wp-content/uploads/2022/11/Picture5-16.png` |
+
+The palette in `globals.css` is sampled from the logotype — **#4472C4** blue and
+**#595959** grey. Do not redraw the mark, recolour it, re-letter the wordmark,
+or swap the accent for something that photographs better on a dark background.
+
+The logotype is a dark-on-light mark, so it sits on a white plate in the header
+and footer. **Ask Orca for a reversed (light-on-dark) version** and drop the
+plate once it exists.
+
+## Copy
+
+Body copy is Orca's, from the live site. Where the redesign needed a line the
+original did not have, it is derived from an adjacent Orca sentence — it never
+introduces a new claim. In particular the site must not state a response time
+for enquiries, or a service level, that Orca has not published.
+
 ## Editing content
 
 Almost everything is data-driven. To change the nav, stats, pillars, therapeutic

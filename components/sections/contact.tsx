@@ -25,15 +25,17 @@ export function Contact() {
           <div className="glass ring-glow relative overflow-hidden rounded-5xl px-8 py-14 text-center md:px-16 md:py-20">
             <div aria-hidden className="pointer-events-none absolute inset-0 grid-veil opacity-50" />
 
-            <span className="section-label relative">Let&apos;s connect</span>
+            <span className="section-label relative">
+              We&apos;re looking forward to speaking with you!
+            </span>
             <h2 className="relative mx-auto mt-5 max-w-3xl font-display text-[clamp(2rem,4.4vw,3.4rem)] leading-[1.05] font-semibold tracking-[-0.035em] text-balance">
-              An entirely new approach to{' '}
-              <span className="text-gradient">aligning clinical research</span>.
+              Let&apos;s <span className="text-gradient">Connect</span>
             </h2>
             <p className="relative mx-auto mt-6 max-w-2xl text-[1.0625rem] leading-relaxed text-mist text-pretty">
-              Orca Trial aligns every stakeholder in clinical research — from patients to
-              physicians to clinical research sites. Whether you come at it as a CRO, a sponsor or
-              a site, contact Orca to learn what we can do together to improve clinical research.
+              Orca Trial represents an entirely new approach to align all stakeholders in clinical
+              research from patients to physician and clinic research. Whether your interest is
+              from the perspective of a CRO, sponsor, or Site, contact Orca to learn what we can do
+              together to improve clinical research.
             </p>
 
             <div className="relative mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -63,7 +65,7 @@ export function Contact() {
             const Glyph = Icon[c.icon]
             const inner = (
               <>
-                <Glyph className="h-5 w-5 text-aqua-400" />
+                <Glyph className="h-5 w-5 text-blue-400" />
                 <span className="mt-4 block text-[0.6875rem] font-semibold tracking-[0.16em] text-fog uppercase">
                   {c.label}
                 </span>

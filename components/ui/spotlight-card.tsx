@@ -36,7 +36,7 @@ export function SpotlightCard({
         className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover/spot:opacity-100"
         style={{
           background:
-            'radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--color-aqua-400) 16%, transparent), transparent 72%)',
+            'radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--color-blue-400) 16%, transparent), transparent 72%)',
         }}
       />
       {children}
