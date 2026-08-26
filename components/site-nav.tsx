@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react'
 import { nav, site } from '@/lib/content'
+import { openEnquiry } from '@/lib/audience-store'
 import { Icon } from './ui/icons'
 import { Logo, Wordmark } from './ui/logo'
 import { ButtonLink } from './ui/button'
@@ -82,21 +83,41 @@ export function SiteNav() {
                   {isActive && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 -z-10 rounded-full border border-aqua-400/25 bg-foam/6"
+                      aria-hidden
+                      className="absolute inset-0 rounded-full border border-aqua-400/25 bg-foam/6"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
-                  {item.label}
+                  <span className="relative">{item.label}</span>
                 </a>
               )
             })}
           </nav>
 
           <div className="flex items-center gap-2">
+            {/* Clinical research is a phone-first business — keep the number
+                one tap away at every scroll position. */}
+            <a
+              href={'tel:' + site.phoneHref}
+              data-cta="nav-phone"
+              className="hidden items-center gap-2 rounded-full px-3 py-2 text-[0.8125rem] font-medium text-mist transition-colors hover:text-foam xl:flex"
+            >
+              <Icon.phone className="h-4 w-4 text-aqua-400" />
+              {site.phone}
+            </a>
+
             {/* Wrapper owns the breakpoint — putting `hidden` on the button
                 itself would collide with its own `inline-flex`. */}
             <div className="hidden sm:block">
-              <ButtonLink href="#register" className="px-5 py-2.5 whitespace-nowrap">
+              <ButtonLink
+                href="#register"
+                data-cta="nav-primary"
+                onClick={(e) => {
+                  e.preventDefault()
+                  openEnquiry('site')
+                }}
+                className="px-5 py-2.5 whitespace-nowrap"
+              >
                 Register your site
                 <Icon.arrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </ButtonLink>
@@ -173,10 +194,30 @@ export function SiteNav() {
                 ))}
               </nav>
 
-              <ButtonLink href="#register" onClick={() => setOpen(false)} className="mt-6 w-full">
+              <ButtonLink
+                href="#register"
+                data-cta="mobilemenu-primary"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setOpen(false)
+                  openEnquiry('site')
+                }}
+                className="mt-6 w-full"
+              >
                 Register your site
                 <Icon.arrowRight className="h-4 w-4" />
               </ButtonLink>
+              <button
+                type="button"
+                data-cta="mobilemenu-sponsor"
+                onClick={() => {
+                  setOpen(false)
+                  openEnquiry('sponsor')
+                }}
+                className="mt-2 w-full rounded-full border border-foam/10 py-3 text-[0.875rem] font-medium text-mist transition-colors hover:text-foam"
+              >
+                I&apos;m a sponsor / CRO
+              </button>
 
               <div className="mt-6 grid gap-2 border-t border-foam/8 pt-5 text-sm text-mist">
                 <a href={'mailto:' + site.email} className="flex items-center gap-2.5 hover:text-foam">

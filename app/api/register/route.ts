@@ -35,6 +35,31 @@ function clientIp(req: Request): string {
   return req.headers.get('x-real-ip') ?? 'unknown'
 }
 
+const SITE_FIELDS = [
+  'siteName',
+  'coordinator',
+  'email',
+  'phone',
+  'city',
+  'state',
+  'address',
+  'zip',
+  'country',
+  'comments',
+] as const
+
+const SPONSOR_FIELDS = [
+  'organization',
+  'contactName',
+  'email',
+  'phone',
+  'role',
+  'therapeuticArea',
+  'siteCount',
+  'timeline',
+  'comments',
+] as const
+
 export async function POST(req: Request) {
   let body: Partial<RegistrationInput>
 
@@ -45,13 +70,13 @@ export async function POST(req: Request) {
   }
 
   // Honeypot: pretend everything went fine so bots do not learn anything.
-  if (String(body.website ?? '').trim()) {
+  if (String((body as Record<string, unknown>).website ?? '').trim()) {
     return NextResponse.json({ ok: true })
   }
 
   if (rateLimited(clientIp(req))) {
     return NextResponse.json(
-      { message: 'Too many submissions. Please try again later.' },
+      { message: 'Too many submissions. Please try again later, or email us directly.' },
       { status: 429 },
     )
   }
@@ -64,18 +89,15 @@ export async function POST(req: Request) {
     )
   }
 
-  const submission = {
-    siteName: String(body.siteName).trim(),
-    email: String(body.email).trim(),
-    coordinator: String(body.coordinator).trim(),
-    address: String(body.address).trim(),
-    city: String(body.city).trim(),
-    state: String(body.state).trim(),
-    country: String(body.country).trim(),
-    zip: String(body.zip).trim(),
-    comments: String(body.comments ?? '').trim(),
-    receivedAt: new Date().toISOString(),
+  const audience = body.audience === 'sponsor' ? 'sponsor' : 'site'
+  const source = body as Record<string, unknown>
+  const fields = audience === 'sponsor' ? SPONSOR_FIELDS : SITE_FIELDS
+
+  const submission: Record<string, string> = { audience }
+  for (const key of fields) {
+    submission[key] = String(source[key] ?? '').trim()
   }
+  submission.receivedAt = new Date().toISOString()
 
   const webhook = process.env.REGISTRATION_WEBHOOK_URL
   if (webhook) {
@@ -98,7 +120,7 @@ export async function POST(req: Request) {
     }
   } else {
     // No delivery target configured — log it so nothing is silently dropped.
-    console.info('[register] new site registration', submission)
+    console.info('[register] new ' + audience + ' enquiry', submission)
   }
 
   return NextResponse.json({ ok: true })

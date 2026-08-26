@@ -3,32 +3,84 @@
 import { useState, type FormEvent } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { site } from '@/lib/content'
+import { setAudience, useAudience, type Audience } from '@/lib/audience-store'
 import {
-  emptyRegistration,
+  SITE_COUNT_OPTIONS,
+  TIMELINE_OPTIONS,
+  emptySite,
+  emptySponsor,
   validateRegistration,
   type FieldErrors,
-  type RegistrationInput,
+  type SiteInput,
+  type SponsorInput,
 } from '@/lib/registration'
 import { Button } from '../ui/button'
-import { Field, TextareaField } from '../ui/field'
+import { Field, SelectField, TextareaField } from '../ui/field'
 import { Icon } from '../ui/icons'
 import { Reveal } from '../ui/reveal'
 import { SectionGlow } from '../ui/atmosphere'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
+const pitch: Record<Audience, { eyebrow: string; title: React.ReactNode; body: string; points: string[] }> = {
+  site: {
+    eyebrow: 'For research sites',
+    title: (
+      <>
+        Put your site on the <span className="text-gradient">Orca network</span>.
+      </>
+    ),
+    body: 'Study availability through the year, no additional fee from the site, and hassle-free business development. Five fields is all we need to start.',
+    points: [
+      'No long-term or exclusive agreements',
+      'Compensation only on successful enrollment',
+      'Payments disbursed the moment sponsors pay',
+    ],
+  },
+  sponsor: {
+    eyebrow: 'For sponsors & CROs',
+    title: (
+      <>
+        Reach 360+ sites through <span className="text-gradient">one contract</span>.
+      </>
+    ),
+    body: 'Tell us about the study and we will come back with relevant sites, a single budget and a feasibility view — contract and budget responses in two working days.',
+    points: [
+      'One negotiation covering every Orca site',
+      'Site identification and feasibility, accelerated',
+      'A single point of contact from startup to payment',
+    ],
+  },
+}
+
 export function Register() {
-  const [values, setValues] = useState<RegistrationInput>(emptyRegistration)
+  const audience = useAudience()
+  const [siteValues, setSiteValues] = useState<SiteInput>(emptySite)
+  const [sponsorValues, setSponsorValues] = useState<SponsorInput>(emptySponsor)
   const [errors, setErrors] = useState<FieldErrors>({})
   const [status, setStatus] = useState<Status>('idle')
   const [serverError, setServerError] = useState('')
+  const [showOptional, setShowOptional] = useState(false)
 
-  function set(key: keyof RegistrationInput) {
+  const copy = pitch[audience]
+  const values = audience === 'site' ? siteValues : sponsorValues
+
+  function set(key: string) {
     return (e: { target: { value: string } }) => {
-      setValues((v) => ({ ...v, [key]: e.target.value }))
+      const next = e.target.value
+      if (audience === 'site') setSiteValues((v) => ({ ...v, [key]: next }))
+      else setSponsorValues((v) => ({ ...v, [key]: next }))
       // Clear the error as soon as the user starts correcting the field.
-      setErrors((prev) => (prev[key] ? { ...prev, [key]: undefined } : prev))
+      setErrors((prev) => (prev[key as keyof FieldErrors] ? { ...prev, [key]: undefined } : prev))
     }
+  }
+
+  function switchTo(next: Audience) {
+    if (next === audience) return
+    setAudience(next)
+    setErrors({})
+    setStatus('idle')
+    setServerError('')
   }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -62,7 +114,8 @@ export function Register() {
       }
 
       setStatus('sent')
-      setValues(emptyRegistration)
+      if (audience === 'site') setSiteValues(emptySite)
+      else setSponsorValues(emptySponsor)
     } catch (err) {
       setStatus('error')
       setServerError(
@@ -84,39 +137,64 @@ export function Register() {
             <div className="lg:sticky lg:top-28">
               <span className="section-label">
                 <span className="h-px w-8 bg-linear-to-r from-transparent to-aqua-400" />
-                Register with us
+                {copy.eyebrow}
               </span>
-              <h2 className="mt-5 font-display text-[clamp(2rem,4.2vw,3.2rem)] leading-[1.05] font-semibold tracking-[-0.035em] text-balance">
-                Put your site on the <span className="text-gradient">Orca network</span>.
-              </h2>
-              <p className="mt-6 text-[1.0625rem] leading-relaxed text-mist text-pretty">
-                Study availability through the year, no additional fee from the site, and
-                hassle-free business development. Tell us about your site and we will be in touch.
-              </p>
 
-              <ul className="mt-9 grid gap-3.5">
-                {[
-                  'No long-term or exclusive agreements',
-                  'Compensation only on successful enrollment',
-                  'Payments disbursed the moment sponsors pay',
-                ].map((p) => (
-                  <li key={p} className="flex items-start gap-3 text-[0.9375rem] text-mist">
-                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-aqua-400/12 text-aqua-300">
-                      <Icon.check className="h-3 w-3" strokeWidth={2.4} />
-                    </span>
-                    {p}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-10 border-t border-foam/8 pt-8 text-sm text-fog">
-                Prefer email?{' '}
-                <a
-                  href={'mailto:' + site.email}
-                  className="text-aqua-300 underline-offset-4 hover:underline"
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={audience}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  {site.email}
-                </a>
+                  <h2 className="mt-5 font-display text-[clamp(2rem,4.2vw,3.2rem)] leading-[1.05] font-semibold tracking-[-0.035em] text-balance">
+                    {copy.title}
+                  </h2>
+                  <p className="mt-6 text-[1.0625rem] leading-relaxed text-mist text-pretty">
+                    {copy.body}
+                  </p>
+
+                  <ul className="mt-9 grid gap-3.5">
+                    {copy.points.map((p) => (
+                      <li key={p} className="flex items-start gap-3 text-[0.9375rem] text-mist">
+                        <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-aqua-400/12 text-aqua-300">
+                          <Icon.check className="h-3 w-3" strokeWidth={2.4} />
+                        </span>
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="mt-10 grid gap-3 border-t border-foam/8 pt-8 text-sm">
+                <p className="flex items-center gap-2.5 text-mist">
+                  <Icon.clock className="h-4 w-4 shrink-0 text-aqua-400" />
+                  We reply within two working days.
+                </p>
+                <p className="flex items-center gap-2.5 text-fog">
+                  <Icon.mail className="h-4 w-4 shrink-0 text-aqua-400" />
+                  Prefer email?{' '}
+                  <a
+                    href={'mailto:' + site.email}
+                    data-cta="form-email"
+                    className="text-aqua-300 underline-offset-4 hover:underline"
+                  >
+                    {site.email}
+                  </a>
+                </p>
+                <p className="flex items-center gap-2.5 text-fog">
+                  <Icon.phone className="h-4 w-4 shrink-0 text-aqua-400" />
+                  Or call{' '}
+                  <a
+                    href={'tel:' + site.phoneHref}
+                    data-cta="form-phone"
+                    className="text-aqua-300 underline-offset-4 hover:underline"
+                  >
+                    {site.phone}
+                  </a>
+                </p>
               </div>
             </div>
           </Reveal>
@@ -124,6 +202,45 @@ export function Register() {
           {/* Form */}
           <Reveal direction="right" amount={0.1}>
             <div className="glass ring-glow relative overflow-hidden rounded-5xl p-7 md:p-10">
+              {/* Audience switch — the single most important control on the page */}
+              <div
+                role="tablist"
+                aria-label="Who are you?"
+                className="relative grid grid-cols-2 gap-1 rounded-full border border-foam/9 bg-abyss/50 p-1"
+              >
+                {(['site', 'sponsor'] as const).map((a) => {
+                  const isActive = a === audience
+                  return (
+                    <button
+                      key={a}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      data-cta={'audience-' + a}
+                      onClick={() => switchTo(a)}
+                      className={
+                        'relative rounded-full px-4 py-2.5 text-[0.8125rem] font-semibold transition-colors duration-300 ' +
+                        (isActive ? 'text-abyss' : 'text-mist hover:text-foam')
+                      }
+                    >
+                      {isActive && (
+                        <motion.span
+                          layoutId="audience-pill"
+                          aria-hidden
+                          className="absolute inset-0 rounded-full bg-linear-to-r from-aqua-400 to-tide-400 shadow-[0_6px_20px_-6px_var(--color-aqua-500)]"
+                          transition={{ type: 'spring', stiffness: 400, damping: 34 }}
+                        />
+                      )}
+                      {/* Sits above the pill; a negative z-index would drop it
+                          behind the tablist's own background. */}
+                      <span className="relative">
+                        {a === 'site' ? "I'm a research site" : "I'm a sponsor / CRO"}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+
               <AnimatePresence mode="wait">
                 {status === 'sent' ? (
                   <motion.div
@@ -132,17 +249,25 @@ export function Register() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex min-h-[26rem] flex-col items-center justify-center text-center"
+                    className="flex min-h-[24rem] flex-col items-center justify-center text-center"
+                    role="status"
                   >
                     <span className="grid h-16 w-16 place-items-center rounded-full border border-aqua-400/30 bg-aqua-400/10 text-aqua-300">
                       <Icon.check className="h-7 w-7" strokeWidth={2} />
                     </span>
                     <h3 className="mt-7 font-display text-2xl font-semibold tracking-[-0.02em] text-foam">
-                      Registration received
+                      Thank you — we have it
                     </h3>
                     <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-mist">
-                      Thank you — we&apos;re looking forward to speaking with you. A member of the
-                      Orca team will follow up shortly.
+                      A member of the Orca team will be in touch within two working days. If it is
+                      urgent, call{' '}
+                      <a
+                        href={'tel:' + site.phoneHref}
+                        className="text-aqua-300 underline-offset-4 hover:underline"
+                      >
+                        {site.phone}
+                      </a>
+                      .
                     </p>
                     <Button
                       variant="outline"
@@ -150,102 +275,214 @@ export function Register() {
                       onClick={() => setStatus('idle')}
                       type="button"
                     >
-                      Register another site
+                      Send another enquiry
                     </Button>
                   </motion.div>
                 ) : (
                   <motion.form
-                    key="form"
+                    key={'form-' + audience}
                     onSubmit={onSubmit}
                     noValidate
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="grid gap-4 sm:grid-cols-2"
+                    transition={{ duration: 0.3 }}
+                    className="mt-6 grid gap-4 sm:grid-cols-2"
                   >
-                    <Field
-                      label="Site name"
-                      name="siteName"
-                      required
-                      autoComplete="organization"
-                      value={values.siteName}
-                      onChange={set('siteName')}
-                      error={errors.siteName}
-                      className="sm:col-span-2"
-                    />
-                    <Field
-                      label="Email"
-                      name="email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                      value={values.email}
-                      onChange={set('email')}
-                      error={errors.email}
-                    />
-                    <Field
-                      label="Site coordinator"
-                      name="coordinator"
-                      required
-                      autoComplete="name"
-                      value={values.coordinator}
-                      onChange={set('coordinator')}
-                      error={errors.coordinator}
-                    />
-                    <Field
-                      label="Address"
-                      name="address"
-                      required
-                      autoComplete="street-address"
-                      value={values.address}
-                      onChange={set('address')}
-                      error={errors.address}
-                      className="sm:col-span-2"
-                    />
-                    <Field
-                      label="City"
-                      name="city"
-                      required
-                      autoComplete="address-level2"
-                      value={values.city}
-                      onChange={set('city')}
-                      error={errors.city}
-                    />
-                    <Field
-                      label="State"
-                      name="state"
-                      required
-                      autoComplete="address-level1"
-                      value={values.state}
-                      onChange={set('state')}
-                      error={errors.state}
-                    />
-                    <Field
-                      label="Country"
-                      name="country"
-                      required
-                      autoComplete="country-name"
-                      value={values.country}
-                      onChange={set('country')}
-                      error={errors.country}
-                    />
-                    <Field
-                      label="Zip code"
-                      name="zip"
-                      required
-                      autoComplete="postal-code"
-                      value={values.zip}
-                      onChange={set('zip')}
-                      error={errors.zip}
-                    />
-                    <TextareaField
-                      label="Comments"
-                      name="comments"
-                      value={values.comments}
-                      onChange={set('comments')}
-                      error={errors.comments}
-                      className="sm:col-span-2"
-                    />
+                    {audience === 'site' ? (
+                      <>
+                        <Field
+                          label="Site name"
+                          name="siteName"
+                          required
+                          autoComplete="organization"
+                          value={siteValues.siteName}
+                          onChange={set('siteName')}
+                          error={errors.siteName}
+                          className="sm:col-span-2"
+                        />
+                        <Field
+                          label="Site coordinator"
+                          name="coordinator"
+                          required
+                          autoComplete="name"
+                          value={siteValues.coordinator}
+                          onChange={set('coordinator')}
+                          error={errors.coordinator}
+                        />
+                        <Field
+                          label="Email"
+                          name="email"
+                          type="email"
+                          required
+                          autoComplete="email"
+                          value={siteValues.email}
+                          onChange={set('email')}
+                          error={errors.email}
+                        />
+                        <Field
+                          label="City"
+                          name="city"
+                          required
+                          autoComplete="address-level2"
+                          value={siteValues.city}
+                          onChange={set('city')}
+                          error={errors.city}
+                        />
+                        <Field
+                          label="State"
+                          name="state"
+                          required
+                          autoComplete="address-level1"
+                          value={siteValues.state}
+                          onChange={set('state')}
+                          error={errors.state}
+                        />
+                        <Field
+                          label="Phone (optional)"
+                          name="phone"
+                          type="tel"
+                          autoComplete="tel"
+                          value={siteValues.phone}
+                          onChange={set('phone')}
+                          className="sm:col-span-2"
+                        />
+
+                        {/* Address detail is not worth a required field — we can
+                            collect it on the call. Hidden until asked for. */}
+                        <div className="sm:col-span-2">
+                          <button
+                            type="button"
+                            onClick={() => setShowOptional((v) => !v)}
+                            aria-expanded={showOptional}
+                            className="flex items-center gap-2 text-[0.8125rem] font-medium text-aqua-300 transition-colors hover:text-aqua-200"
+                          >
+                            <Icon.arrowDown
+                              className={
+                                'h-3.5 w-3.5 transition-transform duration-300 ' +
+                                (showOptional ? 'rotate-180' : '')
+                              }
+                            />
+                            {showOptional ? 'Hide address details' : 'Add address details (optional)'}
+                          </button>
+                        </div>
+
+                        <AnimatePresence initial={false}>
+                          {showOptional && (
+                            <motion.div
+                              key="optional"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                              className="grid gap-4 overflow-hidden sm:col-span-2 sm:grid-cols-2"
+                            >
+                              <Field
+                                label="Address"
+                                name="address"
+                                autoComplete="street-address"
+                                value={siteValues.address}
+                                onChange={set('address')}
+                                className="sm:col-span-2"
+                              />
+                              <Field
+                                label="Country"
+                                name="country"
+                                autoComplete="country-name"
+                                value={siteValues.country}
+                                onChange={set('country')}
+                              />
+                              <Field
+                                label="Zip code"
+                                name="zip"
+                                autoComplete="postal-code"
+                                value={siteValues.zip}
+                                onChange={set('zip')}
+                              />
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+
+                        <TextareaField
+                          label="Anything we should know? (optional)"
+                          name="comments"
+                          rows={3}
+                          value={siteValues.comments}
+                          onChange={set('comments')}
+                          error={errors.comments}
+                          className="sm:col-span-2"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Field
+                          label="Company"
+                          name="organization"
+                          required
+                          autoComplete="organization"
+                          value={sponsorValues.organization}
+                          onChange={set('organization')}
+                          error={errors.organization}
+                          className="sm:col-span-2"
+                        />
+                        <Field
+                          label="Your name"
+                          name="contactName"
+                          required
+                          autoComplete="name"
+                          value={sponsorValues.contactName}
+                          onChange={set('contactName')}
+                          error={errors.contactName}
+                        />
+                        <Field
+                          label="Work email"
+                          name="email"
+                          type="email"
+                          required
+                          autoComplete="email"
+                          value={sponsorValues.email}
+                          onChange={set('email')}
+                          error={errors.email}
+                        />
+                        <Field
+                          label="Phone (optional)"
+                          name="phone"
+                          type="tel"
+                          autoComplete="tel"
+                          value={sponsorValues.phone}
+                          onChange={set('phone')}
+                        />
+                        <Field
+                          label="Therapeutic area (optional)"
+                          name="therapeuticArea"
+                          value={sponsorValues.therapeuticArea}
+                          onChange={set('therapeuticArea')}
+                        />
+                        <SelectField
+                          label="Sites needed"
+                          name="siteCount"
+                          options={SITE_COUNT_OPTIONS}
+                          value={sponsorValues.siteCount}
+                          onChange={set('siteCount')}
+                        />
+                        <SelectField
+                          label="Timeline"
+                          name="timeline"
+                          options={TIMELINE_OPTIONS}
+                          value={sponsorValues.timeline}
+                          onChange={set('timeline')}
+                        />
+                        <TextareaField
+                          label="Tell us about the study (optional)"
+                          name="comments"
+                          rows={3}
+                          value={sponsorValues.comments}
+                          onChange={set('comments')}
+                          error={errors.comments}
+                          className="sm:col-span-2"
+                        />
+                      </>
+                    )}
 
                     {/* Honeypot — hidden from humans and assistive tech */}
                     <div aria-hidden className="hidden">
@@ -272,10 +509,20 @@ export function Register() {
 
                     <div className="mt-2 flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
                       <p className="text-[0.75rem] leading-relaxed text-fog">
-                        We only use these details to contact you about study opportunities.
+                        We only use these details to contact you about study opportunities. No
+                        obligation, no exclusivity.
                       </p>
-                      <Button type="submit" disabled={status === 'sending'} className="shrink-0">
-                        {status === 'sending' ? 'Sending…' : 'Register now'}
+                      <Button
+                        type="submit"
+                        disabled={status === 'sending'}
+                        data-cta={'submit-' + audience}
+                        className="shrink-0"
+                      >
+                        {status === 'sending'
+                          ? 'Sending…'
+                          : audience === 'site'
+                            ? 'Register my site'
+                            : 'Request site feasibility'}
                         {status !== 'sending' && (
                           <Icon.arrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                         )}

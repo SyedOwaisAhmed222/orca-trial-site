@@ -1,4 +1,7 @@
+'use client'
+
 import { audiences, whyOrca } from '@/lib/content'
+import { openEnquiry } from '@/lib/audience-store'
 import { Icon } from '../ui/icons'
 import { Reveal, RevealGroup, RevealItem } from '../ui/reveal'
 import { SectionGlow } from '../ui/atmosphere'
@@ -63,6 +66,16 @@ export function WhyOrca() {
                     </li>
                   ))}
                 </ul>
+
+                <button
+                  type="button"
+                  data-cta={'why-' + a.key}
+                  onClick={() => openEnquiry(a.key === 'sponsors' ? 'sponsor' : 'site')}
+                  className="group/cta mt-8 inline-flex items-center gap-2 text-[0.875rem] font-semibold text-aqua-300 transition-colors hover:text-aqua-200"
+                >
+                  {a.key === 'sponsors' ? 'Request site feasibility' : 'Register your site'}
+                  <Icon.arrowRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" />
+                </button>
               </SpotlightCard>
             </Reveal>
           ))}

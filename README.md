@@ -33,12 +33,13 @@ npm run dev          # http://localhost:3000
 | -------------------- | ------------------------------------------- | ------------ |
 | Hero + stat rail     | `components/sections/hero.tsx`              | `#top`       |
 | Therapeutic ticker   | `components/sections/marquee.tsx`           | —            |
+| Guarantee strip      | `components/sections/trust-bar.tsx`         | —            |
 | Why choose Orca      | `components/sections/why-orca.tsx`          | `#why`       |
 | Business model       | `components/sections/business-model.tsx`    | `#model`     |
 | Sponsors / CROs      | `components/sections/sponsors.tsx`          | `#sponsors`  |
 | Site network + map   | `components/sections/site-network.tsx`      | `#network`   |
 | Therapeutic areas    | `components/sections/therapeutic-areas.tsx` | `#areas`     |
-| Register your site   | `components/sections/register.tsx`          | `#register`  |
+| Enquiry form (both)  | `components/sections/register.tsx`          | `#register`  |
 | Let's connect        | `components/sections/contact.tsx`           | `#contact`   |
 
 ## Editing content
@@ -50,11 +51,27 @@ Adding a therapeutic area also needs a matching glyph in the `AreaIcon` map in
 [`components/ui/icons.tsx`](components/ui/icons.tsx); the `icon` key in the
 content file is type-checked against it.
 
-## The registration form
+## The enquiry form
+
+The form serves **both audiences** from one section. A tab switch flips it
+between a research-site registration and a sponsor/CRO feasibility request, and
+every CTA on the page pre-selects the right tab before scrolling to it (see
+`lib/audience-store.ts`). A sponsor should never be shown a field labelled
+"Site coordinator".
+
+Required fields are kept deliberately short — everything else can be collected
+on the follow-up call:
+
+| Audience     | Required                                          |
+| ------------ | ------------------------------------------------- |
+| Research site | Site name, coordinator, email, city, state        |
+| Sponsor / CRO | Company, contact name, work email                 |
 
 `POST /api/register` validates the submission (shared rules in
 `lib/registration.ts`, so client and server never drift), rejects honeypot hits
-silently, and rate-limits to 5 submissions per IP per 10 minutes.
+silently, and rate-limits to 5 submissions per IP per 10 minutes. The payload
+carries an `audience` field of `"site"` or `"sponsor"`; only the fields for that
+audience are forwarded.
 
 Delivery is configured with environment variables — copy `.env.example` to
 `.env.local`:
@@ -86,6 +103,24 @@ NEXT_PUBLIC_FORM_ENDPOINT=https://formspree.io/f/xxxxxxx npm run export
 
 `scripts/export-static.mjs` temporarily hides `app/api` for the duration of that
 build and always restores it afterwards.
+
+## Conversion notes
+
+Choices here exist to protect the lead, not just to look tidy:
+
+- **Two audiences, one form.** Sponsors and sites want different things and are
+  asked for different fields. Every CTA routes to the right tab.
+- **Short required sets.** Address, zip and phone are optional and collapsed
+  behind a disclosure.
+- **The phone number is always reachable** — nav on desktop, a sticky bar on
+  phones (`components/mobile-cta-bar.tsx`) that hides itself when the form is on
+  screen so it never covers what it points at.
+- **Objections answered early.** `trust-bar.tsx` puts the four deal-breakers
+  (fees, exclusivity, when Orca gets paid, response time) directly under the hero.
+- **A stated response time** ("within two working days") appears beside the form
+  and again on the success screen, alongside the phone number.
+- **Analytics hooks.** Every CTA carries a `data-cta="…"` attribute, so GTM or
+  Plausible can be wired up without touching components.
 
 ## Notes
 

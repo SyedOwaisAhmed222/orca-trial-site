@@ -3,11 +3,12 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { sponsorPillars } from '@/lib/content'
+import { openEnquiry } from '@/lib/audience-store'
 import { Icon } from '../ui/icons'
 import { Reveal } from '../ui/reveal'
 import { SectionGlow } from '../ui/atmosphere'
 import { SectionHeading } from '../ui/section-heading'
-import { ButtonLink } from '../ui/button'
+import { Button } from '../ui/button'
 
 /**
  * The four sponsor pillars as an accordion on the left with the active
@@ -105,6 +106,20 @@ export function Sponsors() {
                 )
               })}
             </ul>
+            {/* The detail panel is desktop-only, so phones get their own CTA */}
+            <div className="mt-8 lg:hidden">
+              <Button
+                data-cta="sponsors-mobile"
+                onClick={() => openEnquiry('sponsor')}
+                className="w-full"
+              >
+                Request site feasibility
+                <Icon.arrowRight className="h-4 w-4" />
+              </Button>
+              <p className="mt-3 text-center text-[0.75rem] text-fog">
+                Contract and budget responses in two working days.
+              </p>
+            </div>
           </Reveal>
 
           {/* Detail panel */}
@@ -135,10 +150,17 @@ export function Sponsors() {
               </AnimatePresence>
 
               <div className="mt-10 border-t border-foam/8 pt-8">
-                <ButtonLink href="#register" variant="outline" className="px-6 py-3">
-                  Start a conversation
+                <Button
+                  data-cta="sponsors-panel"
+                  onClick={() => openEnquiry('sponsor')}
+                  className="px-6 py-3"
+                >
+                  Request site feasibility
                   <Icon.arrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </ButtonLink>
+                </Button>
+                <p className="mt-3 text-[0.75rem] text-fog">
+                  Contract and budget responses in two working days.
+                </p>
               </div>
             </div>
           </Reveal>

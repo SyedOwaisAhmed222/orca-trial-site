@@ -1,5 +1,8 @@
+'use client'
+
 import { site } from '@/lib/content'
-import { ButtonLink } from '../ui/button'
+import { openEnquiry } from '@/lib/audience-store'
+import { Button } from '../ui/button'
 import { Icon } from '../ui/icons'
 import { Reveal, RevealGroup, RevealItem } from '../ui/reveal'
 import { SectionGlow } from '../ui/atmosphere'
@@ -34,18 +37,23 @@ export function Contact() {
             </p>
 
             <div className="relative mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <ButtonLink href="#register" className="px-7 py-3.5 text-[0.9375rem]">
-                Register your site
-                <Icon.arrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </ButtonLink>
-              <ButtonLink
-                href={'mailto:' + site.email}
-                variant="outline"
+              <Button
+                data-cta="contact-site"
+                onClick={() => openEnquiry('site')}
                 className="px-7 py-3.5 text-[0.9375rem]"
               >
-                <Icon.mail className="h-4 w-4" />
-                Email the team
-              </ButtonLink>
+                Register your site
+                <Icon.arrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
+              <Button
+                data-cta="contact-sponsor"
+                variant="outline"
+                onClick={() => openEnquiry('sponsor')}
+                className="px-7 py-3.5 text-[0.9375rem]"
+              >
+                I&apos;m a sponsor / CRO
+                <Icon.arrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
             </div>
           </div>
         </Reveal>

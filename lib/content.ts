@@ -29,6 +29,14 @@ export const stats = [
   { value: 2, suffix: ' days', label: 'Contract turnaround', sub: 'Budget response SLA' },
 ] as const
 
+/** Surfaced high on the page — these four objections kill most enquiries. */
+export const guarantees = [
+  { icon: 'shield', label: 'No hidden fees', sub: 'One budget, all costs covered' },
+  { icon: 'spark', label: 'No exclusivity', sub: 'No long-term agreements' },
+  { icon: 'check', label: 'Paid on enrollment', sub: 'We earn when your site does' },
+  { icon: 'clock', label: '2-day responses', sub: 'Contract and budget turnaround' },
+] as const
+
 export const whyOrca = [
   {
     title: 'A network built for reach',
