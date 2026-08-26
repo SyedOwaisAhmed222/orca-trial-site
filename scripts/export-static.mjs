@@ -30,8 +30,23 @@ if (!process.env.NEXT_PUBLIC_FORM_ENDPOINT) {
 let moved = false
 try {
   if (existsSync(live)) {
-    renameSync(live, parked)
-    moved = true
+    try {
+      renameSync(live, parked)
+      moved = true
+    } catch (err) {
+      // Windows keeps a handle on the directory while `next dev` / `next start`
+      // is running, which surfaces as EPERM on rename.
+      if (err.code === 'EPERM' || err.code === 'EBUSY') {
+        console.error(
+          '[export] Could not move app/api out of the way: the directory is locked.',
+        )
+        console.error(
+          '         Stop any running `next dev` / `next start` process and try again.',
+        )
+        process.exit(1)
+      }
+      throw err
+    }
   }
 
   const result = spawnSync('npx', ['next', 'build'], {
