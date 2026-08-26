@@ -1,0 +1,128 @@
+name: Deploy
+
+on:
+  push:
+    branches: [dev, uat, prod]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-site-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # Branch name == GitHub Environment name (dev / uat / prod). Every
+    # host-specific value comes from that Environment, so this file never
+    # changes when an environment moves to a different box.
+    environment: ${{ github.ref_name }}
+
+    env:
+      SSH_HOST: ${{ vars.SSH_HOST }}
+      SSH_USER: ${{ vars.SSH_USER }}
+      REMOTE_DIR: ${{ vars.REMOTE_DIR }}
+
+    steps:
+      - name: Check this environment is configured
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+        run: |
+          fail=0
+          for name in SSH_HOST SSH_USER REMOTE_DIR SSH_KEY; do
+            eval "value=\${$name}"
+            if [ -z "$value" ]; then
+              echo "::error::'$name' is empty. Add it under Settings -> Environments -> ${{ github.ref_name }}."
+              fail=1
+            fi
+          done
+          # The rsync below syncs ONTO $REMOTE_DIR, so --delete empties whatever
+          # that path points at. Refuse a home directory or /.
+          case "$REMOTE_DIR" in
+            /*/*/*) ;;
+            *) echo "::error::REMOTE_DIR must be an absolute path like /home/deploy/dev-site (got '$REMOTE_DIR')."
+               fail=1 ;;
+          esac
+          # ecosystem.config.js derives the pm2 app name and port from this
+          # directory's basename.
+          case "$(basename "$REMOTE_DIR")" in
+            dev-site|uat-site|site) ;;
+            *) echo "::error::REMOTE_DIR basename must be dev-site, uat-site or site (got '$(basename "$REMOTE_DIR")')."
+               fail=1 ;;
+          esac
+          [ "$fail" -eq 0 ] || exit 1
+          echo "branch ${{ github.ref_name }} -> $SSH_USER@$SSH_HOST:$REMOTE_DIR"
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      # `output: 'standalone'` emits a server that expects public/ and
+      # .next/static alongside it; Next does not copy them itself.
+      - name: Assemble standalone output
+        run: |
+          set -e
+          cp -r public .next/standalone/public
+          mkdir -p .next/standalone/.next/static
+          cp -r .next/static/* .next/standalone/.next/static/
+          cp ecosystem.config.js .next/standalone/ecosystem.config.js
+
+      - name: Install SSH key
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+        run: |
+          set -e
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      # Trailing slash on '.next/standalone/' makes $REMOTE_DIR itself the
+      # synchronised directory, so --delete removes stale chunks. --exclude
+      # protects the runtime env file, since an excluded file is also excluded
+      # from deletion.
+      - name: Ship build artifacts
+        run: |
+          set -e
+          rsync -av --delete \
+            --exclude='.env*' \
+            .next/standalone/ \
+            "$SSH_USER@$SSH_HOST:$REMOTE_DIR/"
+
+      # Unlike the CRM front end, this app has server-side runtime config: the
+      # enquiry form's delivery target. It is written after rsync so it is never
+      # deleted, and never committed to the repo.
+      - name: Write runtime env
+        env:
+          REGISTRATION_WEBHOOK_URL: ${{ secrets.REGISTRATION_WEBHOOK_URL }}
+          REGISTRATION_NOTIFY_EMAIL: ${{ vars.REGISTRATION_NOTIFY_EMAIL }}
+        run: |
+          set -e
+          {
+            printf 'REGISTRATION_WEBHOOK_URL=%s\n' "$REGISTRATION_WEBHOOK_URL"
+            printf 'REGISTRATION_NOTIFY_EMAIL=%s\n' "$REGISTRATION_NOTIFY_EMAIL"
+          } > runtime.env
+          scp runtime.env "$SSH_USER@$SSH_HOST:$REMOTE_DIR/.env.production"
+          rm runtime.env
+          if [ -z "$REGISTRATION_WEBHOOK_URL" ]; then
+            echo "::warning::REGISTRATION_WEBHOOK_URL is not set for ${{ github.ref_name }}. Enquiries will only be written to the pm2 log and will be lost on restart."
+          fi
+
+      - name: Reload under pm2
+        run: |
+          set -e
+          ssh "$SSH_USER@$SSH_HOST" bash -s <<EOF
+          set -e
+          cd "$REMOTE_DIR"
+          pm2 reload ecosystem.config.js --update-env || pm2 start ecosystem.config.js
+          pm2 save
+          pm2 list
+          EOF
